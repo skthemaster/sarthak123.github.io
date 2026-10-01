@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NEXORA - Digital Store</title>
 
 <style>
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 html {
@@ -17,77 +16,32 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 10% 10%, rgba(0,217,255,.12), transparent 25%),
-        radial-gradient(circle at 90% 30%, rgba(124,58,237,.14), transparent 30%),
-        #050816;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #050816;
     color: white;
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-
-/* BACKGROUND GLOW */
-
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    width: 450px;
-    height: 450px;
-    border-radius: 50%;
-    filter: blur(160px);
-    pointer-events: none;
-    z-index: -1;
-}
-
-body::before {
-    background: #00d9ff;
-    opacity: .08;
-    top: 5%;
-    left: -200px;
-    animation: float1 9s ease-in-out infinite alternate;
-}
-
-body::after {
-    background: #7c3aed;
-    opacity: .09;
-    bottom: 5%;
-    right: -200px;
-    animation: float2 11s ease-in-out infinite alternate;
-}
-
-@keyframes float1 {
-    from { transform: translateY(0); }
-    to { transform: translateY(120px); }
-}
-
-@keyframes float2 {
-    from { transform: translateY(0); }
-    to { transform: translateY(-120px); }
 }
 
 /* HEADER */
-
 header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    padding: 16px 6%;
+    background: rgba(5, 8, 22, 0.92);
+    backdrop-filter: blur(15px);
+    padding: 18px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5,8,22,.78);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .logo {
-    font-size: 29px;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-size: 28px;
+    font-weight: bold;
     color: #00d9ff;
-    text-shadow: 0 0 20px rgba(0,217,255,.5);
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(0,217,255,0.6);
 }
 
 nav {
@@ -96,145 +50,83 @@ nav {
 }
 
 nav button {
-    border: 1px solid transparent;
-    background: rgba(255,255,255,.06);
+    border: none;
+    background: transparent;
     color: white;
-    padding: 11px 19px;
-    border-radius: 30px;
+    padding: 12px 18px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
-    transition: .3s ease;
+    transition: 0.3s;
 }
 
-nav button:hover {
-    transform: translateY(-2px);
-    background: rgba(0,217,255,.12);
-    border-color: rgba(0,217,255,.4);
-}
-
+nav button:hover,
 nav button.active {
     background: white;
     color: #111;
-    box-shadow: 0 0 25px rgba(255,255,255,.25);
+    transform: translateY(-2px);
 }
 
 /* HERO */
-
 .hero {
-    position: relative;
-    min-height: 430px;
-    padding: 80px 7%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 100px 7% 70px;
     text-align: center;
-    overflow: hidden;
     background:
-        linear-gradient(135deg, rgba(22,38,104,.92), rgba(5,16,42,.97));
-}
-
-.hero::before,
-.hero::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(0,217,255,.14);
-}
-
-.hero::before {
-    width: 320px;
-    height: 320px;
-    animation: spin 15s linear infinite;
-}
-
-.hero::after {
-    width: 560px;
-    height: 560px;
-    border-color: rgba(124,58,237,.12);
-    animation: spinReverse 20s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes spinReverse {
-    to { transform: rotate(-360deg); }
-}
-
-.hero > * {
-    position: relative;
-    z-index: 2;
+        radial-gradient(circle at top, rgba(0,217,255,0.18), transparent 40%),
+        linear-gradient(135deg, #111c52, #07152f);
 }
 
 .hero h1 {
-    font-size: clamp(40px, 7vw, 72px);
-    line-height: 1.05;
-    margin-bottom: 20px;
-    background: linear-gradient(
-        90deg,
-        #ffffff,
-        #00d9ff,
-        #8b5cf6,
-        #ffffff
-    );
-    background-size: 300%;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradientMove 5s linear infinite;
-}
-
-@keyframes gradientMove {
-    from { background-position: 0%; }
-    to { background-position: 300%; }
+    font-size: clamp(35px, 6vw, 60px);
+    margin: 10px 0;
+    animation: fadeDown 0.8s ease;
 }
 
 .hero p {
-    max-width: 650px;
     color: #c7d2fe;
     font-size: 17px;
-    line-height: 1.7;
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* SECTION */
-
 .section {
-    padding: 65px 7%;
+    padding: 55px 7%;
 }
 
 .section h2 {
-    font-size: 32px;
+    font-size: 30px;
     margin-bottom: 25px;
 }
 
 /* SEARCH */
-
 .search {
     width: 100%;
-    padding: 17px 20px;
-    margin-bottom: 35px;
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,.08);
-    outline: none;
-    background: rgba(24,37,75,.65);
+    padding: 17px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    background: #18254b;
     color: white;
     font-size: 16px;
-    backdrop-filter: blur(10px);
-    transition: .3s;
-}
-
-.search::placeholder {
-    color: #8994b5;
+    margin-bottom: 30px;
+    outline: none;
 }
 
 .search:focus {
     border-color: #00d9ff;
-    box-shadow: 0 0 25px rgba(0,217,255,.18);
+    box-shadow: 0 0 15px rgba(0,217,255,0.2);
 }
 
 /* GRID */
-
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -242,74 +134,45 @@ nav button.active {
 }
 
 /* CARD */
-
 .card {
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(145deg, #101936, #0b1228);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 20px;
-    background: linear-gradient(
-        145deg,
-        rgba(20,31,65,.96),
-        rgba(9,16,38,.96)
-    );
-    border: 1px solid rgba(255,255,255,.07);
-    box-shadow: 0 10px 35px rgba(0,0,0,.3);
-    transition: .4s ease;
-    animation: cardIn .7s ease both;
+    overflow: hidden;
+    transition: 0.35s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    animation: cardAppear 0.7s ease;
 }
 
-@keyframes cardIn {
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(0,217,255,0.5);
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.5),
+        0 0 25px rgba(0,217,255,0.12);
+}
+
+@keyframes cardAppear {
     from {
         opacity: 0;
         transform: translateY(25px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-.card:hover {
-    transform: translateY(-10px) scale(1.015);
-    border-color: rgba(0,217,255,.35);
-    box-shadow:
-        0 20px 45px rgba(0,0,0,.45),
-        0 0 30px rgba(0,217,255,.08);
-}
-
-.card::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -120%;
-    width: 80%;
-    height: 100%;
-    background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,.08),
-        transparent
-    );
-    transform: skewX(-20deg);
-    transition: .7s;
-    pointer-events: none;
-}
-
-.card:hover::after {
-    left: 140%;
-}
-
 .card img {
     width: 100%;
-    height: 250px;
+    height: 230px;
     object-fit: cover;
     display: block;
-    transition: .5s ease;
+    transition: 0.4s;
 }
 
 .card:hover img {
-    transform: scale(1.07);
+    transform: scale(1.05);
 }
 
 .card-content {
@@ -317,97 +180,84 @@ nav button.active {
 }
 
 .card h3 {
-    margin-bottom: 10px;
+    margin: 0 0 10px;
     font-size: 20px;
 }
 
 .card p {
     color: #aeb9d6;
-    min-height: 45px;
+    min-height: 42px;
     line-height: 1.5;
 }
 
 .price {
-    margin: 17px 0;
     font-size: 21px;
-    font-weight: 800;
+    font-weight: bold;
+    margin: 18px 0;
+    color: #00d9ff;
 }
 
-/* PURCHASE */
-
+/* PURCHASE BUTTON */
 .purchase {
     width: 100%;
     padding: 14px;
     border: none;
     border-radius: 12px;
-    background: linear-gradient(90deg,#ffffff,#e7faff);
-    color: #080b17;
-    font-weight: 800;
+    background: white;
+    color: #111;
+    font-weight: bold;
     cursor: pointer;
-    transition: .3s ease;
+    transition: 0.3s;
 }
 
 .purchase:hover {
     background: #00d9ff;
+    color: #001018;
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(0,217,255,.45);
+    box-shadow: 0 0 20px rgba(0,217,255,0.4);
 }
 
 .purchase:active {
-    transform: scale(.97);
+    transform: scale(0.97);
 }
 
 /* HIDDEN */
-
 .hidden {
-    display: none !important;
+    display: none;
 }
 
 /* FOOTER */
-
 footer {
     text-align: center;
-    padding: 50px 20px;
+    padding: 45px;
     color: #8994b5;
-    border-top: 1px solid rgba(255,255,255,.06);
+    border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 /* MOBILE */
-
-@media(max-width:700px) {
+@media (max-width: 600px) {
 
     header {
-        padding: 14px 4%;
         flex-direction: column;
-        gap: 14px;
+        gap: 15px;
     }
 
     nav {
-        width: 100%;
+        flex-wrap: wrap;
         justify-content: center;
     }
 
     nav button {
-        flex: 1;
-        padding: 11px 8px;
+        padding: 10px 13px;
         font-size: 13px;
     }
 
     .hero {
-        min-height: 360px;
-        padding: 60px 5%;
-    }
-
-    .hero h1 {
-        font-size: 40px;
+        padding: 70px 5%;
     }
 
     .section {
-        padding: 45px 5%;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
+        padding: 40px 5%;
     }
 }
 </style>
@@ -417,750 +267,690 @@ footer {
 
 <header>
 
-<div class="logo">NEXORA</div>
+    <div class="logo">NEXORA</div>
 
-<nav>
+    <nav>
+        <button class="active" onclick="showSection('gaming', this)">
+            🎮 Gaming
+        </button>
 
-<button class="active" onclick="showSection('gaming',this)">
-🎮 Gaming
-</button>
+        <button onclick="showSection('ott', this)">
+            📺 OTT
+        </button>
 
-<button onclick="showSection('ott',this)">
-📺 OTT
-</button>
-
-<button onclick="showSection('services',this)">
-💻 Services
-</button>
-
-</nav>
+        <button onclick="showSection('services', this)">
+            💻 Services
+        </button>
+    </nav>
 
 </header>
 
 
-<!-- GAMING -->
+<!-- ================= GAMING ================= -->
 
 <section id="gaming">
 
-<div class="hero">
+    <div class="hero">
+        <h1>LEVEL UP YOUR GAMING</h1>
+        <p>Popular games and digital gaming products in one place.</p>
+    </div>
 
-<h1>LEVEL UP YOUR GAMING</h1>
+    <div class="section">
 
-<p>
-Discover popular games and digital gaming products
-in one premium destination.
-</p>
+        <h2>🔥 Popular Games</h2>
 
-</div>
+        <input
+            type="text"
+            class="search"
+            placeholder="Search games..."
+            onkeyup="searchGames()"
+            id="gameSearch"
+        >
 
-<div class="section">
+        <div class="grid" id="gameGrid">
 
-<h2>🔥 Popular Games</h2>
+            <!-- GTA V -->
+            <div class="card game-card">
 
-<input
-id="gameSearch"
-class="search"
-type="text"
-placeholder="🔎 Search games..."
-onkeyup="searchGames()"
->
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
+                    alt="Grand Theft Auto V"
+                >
 
-<div class="grid">
+                <div class="card-content">
 
+                    <h3>Grand Theft Auto V</h3>
 
-<!-- GTA V -->
+                    <p>Open-world action adventure.</p>
 
-<div class="card game-card">
+                    <div class="price">₹999</div>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
-alt="Grand Theft Auto V"
->
+                    <button
+                        class="purchase"
+                        onclick="purchase('Grand Theft Auto V', '₹999')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<div class="card-content">
+                </div>
+            </div>
 
-<h3>Grand Theft Auto V</h3>
 
-<p>Open-world action adventure.</p>
+            <!-- RDR2 -->
+            <div class="card game-card">
 
-<div class="price">₹999</div>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"
+                    alt="Red Dead Redemption 2"
+                >
 
-<button
-class="purchase"
-onclick="purchase('Grand Theft Auto V','₹999')"
->
-PURCHASE NOW
-</button>
+                <div class="card-content">
 
-</div>
-</div>
+                    <h3>Red Dead Redemption 2</h3>
 
+                    <p>Epic open-world western adventure.</p>
 
-<!-- RDR2 -->
+                    <div class="price">₹1,299</div>
 
-<div class="card game-card">
+                    <button
+                        class="purchase"
+                        onclick="purchase('Red Dead Redemption 2', '₹1,299')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"
-alt="Red Dead Redemption 2"
->
+                </div>
+            </div>
 
-<div class="card-content">
 
-<h3>Red Dead Redemption 2</h3>
+            <!-- Cyberpunk -->
+            <div class="card game-card">
 
-<p>Epic open-world western adventure.</p>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"
+                    alt="Cyberpunk 2077"
+                >
 
-<div class="price">₹1,299</div>
+                <div class="card-content">
 
-<button
-class="purchase"
-onclick="purchase('Red Dead Redemption 2','₹1,299')"
->
-PURCHASE NOW
-</button>
+                    <h3>Cyberpunk 2077</h3>
 
-</div>
-</div>
+                    <p>Open-world futuristic RPG.</p>
 
+                    <div class="price">₹1,499</div>
 
-<!-- CYBERPUNK -->
+                    <button
+                        class="purchase"
+                        onclick="purchase('Cyberpunk 2077', '₹1,499')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<div class="card game-card">
+                </div>
+            </div>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"
-alt="Cyberpunk 2077"
->
 
-<div class="card-content">
+            <!-- Minecraft -->
+            <div class="card game-card">
 
-<h3>Cyberpunk 2077</h3>
+                <img
+                    src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/MC_About_Minecraft_Java-Bedrock_Overview.jpg"
+                    alt="Minecraft"
+                >
 
-<p>Open-world futuristic RPG.</p>
+                <div class="card-content">
 
-<div class="price">₹1,499</div>
+                    <h3>Minecraft</h3>
 
-<button
-class="purchase"
-onclick="purchase('Cyberpunk 2077','₹1,499')"
->
-PURCHASE NOW
-</button>
+                    <p>Build, explore and survive.</p>
 
-</div>
-</div>
+                    <div class="price">₹999</div>
 
+                    <button
+                        class="purchase"
+                        onclick="purchase('Minecraft', '₹999')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<!-- MINECRAFT -->
+                </div>
+            </div>
 
-<div class="card game-card">
 
-<img
-src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/MC_About_Minecraft_Java-Bedrock_Overview.jpg"
-alt="Minecraft"
->
+            <!-- Witcher 3 -->
+            <div class="card game-card">
 
-<div class="card-content">
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
+                    alt="The Witcher 3"
+                >
 
-<h3>Minecraft</h3>
+                <div class="card-content">
 
-<p>Build, explore and survive.</p>
+                    <h3>The Witcher 3</h3>
 
-<div class="price">₹999</div>
+                    <p>Fantasy open-world RPG.</p>
 
-<button
-class="purchase"
-onclick="purchase('Minecraft','₹999')"
->
-PURCHASE NOW
-</button>
+                    <div class="price">₹899</div>
 
-</div>
-</div>
+                    <button
+                        class="purchase"
+                        onclick="purchase('The Witcher 3', '₹899')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
+                </div>
+            </div>
 
-<!-- WITCHER -->
 
-<div class="card game-card">
+            <!-- Elden Ring -->
+            <div class="card game-card">
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
-alt="The Witcher 3"
->
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
+                    alt="Elden Ring"
+                >
 
-<div class="card-content">
+                <div class="card-content">
 
-<h3>The Witcher 3</h3>
+                    <h3>Elden Ring</h3>
 
-<p>Fantasy open-world RPG.</p>
+                    <p>Massive fantasy action RPG.</p>
 
-<div class="price">₹899</div>
+                    <div class="price">₹2,499</div>
 
-<button
-class="purchase"
-onclick="purchase('The Witcher 3','₹899')"
->
-PURCHASE NOW
-</button>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Elden Ring', '₹2,499')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-</div>
-</div>
+                </div>
+            </div>
 
 
-<!-- ELDEN RING -->
+            <!-- Hogwarts -->
+            <div class="card game-card">
 
-<div class="card game-card">
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg"
+                    alt="Hogwarts Legacy"
+                >
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
-alt="Elden Ring"
->
+                <div class="card-content">
 
-<div class="card-content">
+                    <h3>Hogwarts Legacy</h3>
 
-<h3>Elden Ring</h3>
+                    <p>Explore the wizarding world.</p>
 
-<p>Massive fantasy action RPG.</p>
+                    <div class="price">₹1,999</div>
 
-<div class="price">₹2,499</div>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Hogwarts Legacy', '₹1,999')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<button
-class="purchase"
-onclick="purchase('Elden Ring','₹2,499')"
->
-PURCHASE NOW
-</button>
+                </div>
+            </div>
 
-</div>
-</div>
 
+            <!-- Forza -->
+            <div class="card game-card">
 
-<!-- HOGWARTS -->
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg"
+                    alt="Forza Horizon 5"
+                >
 
-<div class="card game-card">
+                <div class="card-content">
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg"
-alt="Hogwarts Legacy"
->
+                    <h3>Forza Horizon 5</h3>
 
-<div class="card-content">
+                    <p>Open-world racing experience.</p>
 
-<h3>Hogwarts Legacy</h3>
+                    <div class="price">₹1,299</div>
 
-<p>Explore the wizarding world.</p>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Forza Horizon 5', '₹1,299')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<div class="price">₹1,999</div>
+                </div>
+            </div>
 
-<button
-class="purchase"
-onclick="purchase('Hogwarts Legacy','₹1,999')"
->
-PURCHASE NOW
-</button>
 
-</div>
-</div>
+            <!-- Spider-Man -->
+            <div class="card game-card">
 
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
+                    alt="Marvel Spider-Man Remastered"
+                >
 
-<!-- FORZA -->
+                <div class="card-content">
 
-<div class="card game-card">
+                    <h3>Marvel's Spider-Man Remastered</h3>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg"
-alt="Forza Horizon 5"
->
+                    <p>Become Spider-Man and protect New York.</p>
 
-<div class="card-content">
+                    <div class="price">₹2,499</div>
 
-<h3>Forza Horizon 5</h3>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Marvel Spider-Man Remastered', '₹2,499')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<p>Open-world racing experience.</p>
+                </div>
+            </div>
 
-<div class="price">₹1,299</div>
 
-<button
-class="purchase"
-onclick="purchase('Forza Horizon 5','₹1,299')"
->
-PURCHASE NOW
-</button>
+            <!-- God of War -->
+            <div class="card game-card">
 
-</div>
-</div>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg"
+                    alt="God of War"
+                >
 
+                <div class="card-content">
 
-<!-- SPIDER MAN -->
+                    <h3>God of War</h3>
 
-<div class="card game-card">
+                    <p>Action-packed Norse adventure.</p>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
-alt="Marvel Spider-Man Remastered"
->
+                    <div class="price">₹1,999</div>
 
-<div class="card-content">
+                    <button
+                        class="purchase"
+                        onclick="purchase('God of War', '₹1,999')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<h3>Marvel's Spider-Man Remastered</h3>
+                </div>
+            </div>
 
-<p>Become Spider-Man and protect New York.</p>
 
-<div class="price">₹2,499</div>
+            <!-- Horizon -->
+            <div class="card game-card">
 
-<button
-class="purchase"
-onclick="purchase('Marvel Spider-Man Remastered','₹2,499')"
->
-PURCHASE NOW
-</button>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg"
+                    alt="Horizon Zero Dawn"
+                >
 
-</div>
-</div>
+                <div class="card-content">
 
+                    <h3>Horizon Zero Dawn</h3>
 
-<!-- GOD OF WAR -->
+                    <p>Explore a world ruled by machines.</p>
 
-<div class="card game-card">
+                    <div class="price">₹999</div>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg"
-alt="God of War"
->
+                    <button
+                        class="purchase"
+                        onclick="purchase('Horizon Zero Dawn', '₹999')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<div class="card-content">
+                </div>
+            </div>
 
-<h3>God of War</h3>
 
-<p>Action-packed Norse adventure.</p>
+            <!-- Assassin's Creed -->
+            <div class="card game-card">
 
-<div class="price">₹1,999</div>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
+                    alt="Assassin's Creed Odyssey"
+                >
 
-<button
-class="purchase"
-onclick="purchase('God of War','₹1,999')"
->
-PURCHASE NOW
-</button>
+                <div class="card-content">
 
-</div>
-</div>
+                    <h3>Assassin's Creed Odyssey</h3>
 
+                    <p>Explore ancient Greece.</p>
 
-<!-- HORIZON -->
+                    <div class="price">₹899</div>
 
-<div class="card game-card">
+                    <button
+                        class="purchase"
+                        onclick="purchase('Assassins Creed Odyssey', '₹899')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg"
-alt="Horizon Zero Dawn"
->
+                </div>
+            </div>
 
-<div class="card-content">
 
-<h3>Horizon Zero Dawn</h3>
+            <!-- Far Cry -->
+            <div class="card game-card">
 
-<p>Explore a world ruled by machines.</p>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/header.jpg"
+                    alt="Far Cry 6"
+                >
 
-<div class="price">₹999</div>
+                <div class="card-content">
 
-<button
-class="purchase"
-onclick="purchase('Horizon Zero Dawn','₹999')"
->
-PURCHASE NOW
-</button>
+                    <h3>Far Cry 6</h3>
 
-</div>
-</div>
+                    <p>Open-world action adventure.</p>
 
+                    <div class="price">₹1,499</div>
 
-<!-- ASSASSINS CREED -->
+                    <button
+                        class="purchase"
+                        onclick="purchase('Far Cry 6', '₹1,499')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<div class="card game-card">
+                </div>
+            </div>
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
-alt="Assassins Creed Odyssey"
->
 
-<div class="card-content">
+            <!-- Resident Evil -->
+            <div class="card game-card">
 
-<h3>Assassin's Creed Odyssey</h3>
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg"
+                    alt="Resident Evil 4"
+                >
 
-<p>Explore ancient Greece.</p>
+                <div class="card-content">
 
-<div class="price">₹899</div>
+                    <h3>Resident Evil 4</h3>
 
-<button
-class="purchase"
-onclick="purchase('Assassins Creed Odyssey','₹899')"
->
-PURCHASE NOW
-</button>
+                    <p>Survival horror action.</p>
 
-</div>
-</div>
+                    <div class="price">₹1,799</div>
 
+                    <button
+                        class="purchase"
+                        onclick="purchase('Resident Evil 4', '₹1,799')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<!-- FAR CRY -->
+                </div>
+            </div>
 
-<div class="card game-card">
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/header.jpg"
-alt="Far Cry 6"
->
+            <!-- Watch Dogs -->
+            <div class="card game-card">
 
-<div class="card-content">
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
+                    alt="Watch Dogs 2"
+                >
 
-<h3>Far Cry 6</h3>
+                <div class="card-content">
 
-<p>Open-world action adventure.</p>
+                    <h3>Watch Dogs 2</h3>
 
-<div class="price">₹1,499</div>
+                    <p>Hack your way through San Francisco.</p>
 
-<button
-class="purchase"
-onclick="purchase('Far Cry 6','₹1,499')"
->
-PURCHASE NOW
-</button>
+                    <div class="price">₹799</div>
 
-</div>
-</div>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Watch Dogs 2', '₹799')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
+                </div>
+            </div>
 
-<!-- RESIDENT EVIL -->
 
-<div class="card game-card">
+            <!-- NFS -->
+            <div class="card game-card">
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg"
-alt="Resident Evil 4"
->
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/header.jpg"
+                    alt="Need for Speed Heat"
+                >
 
-<div class="card-content">
+                <div class="card-content">
 
-<h3>Resident Evil 4</h3>
+                    <h3>Need for Speed Heat</h3>
 
-<p>Survival horror action.</p>
+                    <p>Street racing and high-speed action.</p>
 
-<div class="price">₹1,799</div>
+                    <div class="price">₹999</div>
 
-<button
-class="purchase"
-onclick="purchase('Resident Evil 4','₹1,799')"
->
-PURCHASE NOW
-</button>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Need for Speed Heat', '₹999')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-</div>
-</div>
+                </div>
+            </div>
 
 
-<!-- WATCH DOGS -->
+            <!-- Dying Light -->
+            <div class="card game-card">
 
-<div class="card game-card">
+                <img
+                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/239140/header.jpg"
+                    alt="Dying Light"
+                >
 
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
-alt="Watch Dogs 2"
->
+                <div class="card-content">
 
-<div class="card-content">
+                    <h3>Dying Light</h3>
 
-<h3>Watch Dogs 2</h3>
+                    <p>Open-world zombie survival.</p>
 
-<p>Hack your way through San Francisco.</p>
+                    <div class="price">₹699</div>
 
-<div class="price">₹799</div>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Dying Light', '₹699')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<button
-class="purchase"
-onclick="purchase('Watch Dogs 2','₹799')"
->
-PURCHASE NOW
-</button>
+                </div>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
 
-
-<!-- NFS -->
-
-<div class="card game-card">
-
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/header.jpg"
-alt="Need for Speed Heat"
->
-
-<div class="card-content">
-
-<h3>Need for Speed Heat</h3>
-
-<p>Street racing and high-speed action.</p>
-
-<div class="price">₹999</div>
-
-<button
-class="purchase"
-onclick="purchase('Need for Speed Heat','₹999')"
->
-PURCHASE NOW
-</button>
-
-</div>
-</div>
-
-
-<!-- DYING LIGHT -->
-
-<div class="card game-card">
-
-<img
-src="https://cdn.cloudflare.steamstatic.com/steam/apps/239140/header.jpg"
-alt="Dying Light"
->
-
-<div class="card-content">
-
-<h3>Dying Light</h3>
-
-<p>Open-world zombie survival.</p>
-
-<div class="price">₹699</div>
-
-<button
-class="purchase"
-onclick="purchase('Dying Light','₹699')"
->
-PURCHASE NOW
-</button>
-
-</div>
-</div>
-
-</div>
-</div>
 </section>
 
 
-<!-- OTT -->
+<!-- ================= OTT ================= -->
 
 <section id="ott" class="hidden">
 
-<div class="hero">
+    <div class="hero">
+        <h1>STREAMING SUBSCRIPTIONS</h1>
+        <p>Choose your favourite streaming platform.</p>
+    </div>
 
-<h1>STREAMING SUBSCRIPTIONS</h1>
+    <div class="section">
 
-<p>
-Choose your favourite streaming platform.
-</p>
+        <h2>📺 Popular OTT Platforms</h2>
 
-</div>
+        <div class="grid">
 
-<div class="section">
+            <div class="card">
 
-<h2>📺 Popular OTT Platforms</h2>
+                <img
+                    src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80"
+                    alt="Netflix"
+                >
 
-<div class="grid">
+                <div class="card-content">
 
+                    <h3>Netflix</h3>
 
-<div class="card">
+                    <p>Movies, series and originals.</p>
 
-<img
-src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80"
-alt="Netflix"
->
+                    <div class="price">From ₹149</div>
 
-<div class="card-content">
+                    <button
+                        class="purchase"
+                        onclick="purchase('Netflix Subscription', '₹149')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<h3>Netflix</h3>
-
-<p>Movies, series and originals.</p>
-
-<div class="price">From ₹149</div>
-
-<button
-class="purchase"
-onclick="purchase('Netflix Subscription','₹149')"
->
-PURCHASE NOW
-</button>
-
-</div>
-</div>
+                </div>
+            </div>
 
 
-<div class="card">
+            <div class="card">
 
-<img
-src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80"
-alt="Prime Video"
->
+                <img
+                    src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80"
+                    alt="Prime Video"
+                >
 
-<div class="card-content">
+                <div class="card-content">
 
-<h3>Prime Video</h3>
+                    <h3>Prime Video</h3>
 
-<p>Movies, shows and originals.</p>
+                    <p>Movies, shows and originals.</p>
 
-<div class="price">From ₹299</div>
+                    <div class="price">From ₹299</div>
 
-<button
-class="purchase"
-onclick="purchase('Prime Video Subscription','₹299')"
->
-PURCHASE NOW
-</button>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Prime Video Subscription', '₹299')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-</div>
-</div>
+                </div>
+            </div>
 
 
-<div class="card">
+            <div class="card">
 
-<img
-src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=800&q=80"
-alt="JioHotstar"
->
+                <img
+                    src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=800&q=80"
+                    alt="JioHotstar"
+                >
 
-<div class="card-content">
+                <div class="card-content">
 
-<h3>JioHotstar</h3>
+                    <h3>JioHotstar</h3>
 
-<p>Sports, movies and entertainment.</p>
+                    <p>Sports, movies and entertainment.</p>
 
-<div class="price">From ₹149</div>
+                    <div class="price">From ₹149</div>
 
-<button
-class="purchase"
-onclick="purchase('JioHotstar Subscription','₹149')"
->
-PURCHASE NOW
-</button>
+                    <button
+                        class="purchase"
+                        onclick="purchase('JioHotstar Subscription', '₹149')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-</div>
-</div>
+                </div>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
+
 </section>
 
 
-<!-- SERVICES -->
+<!-- ================= SERVICES ================= -->
 
 <section id="services" class="hidden">
 
-<div class="hero">
+    <div class="hero">
+        <h1>DIGITAL SERVICES</h1>
+        <p>Useful digital services in one place.</p>
+    </div>
 
-<h1>DIGITAL SERVICES</h1>
+    <div class="section">
 
-<p>
-Useful digital services in one place.
-</p>
+        <h2>💻 Our Services</h2>
 
-</div>
+        <div class="grid">
 
-<div class="section">
+            <div class="card">
 
-<h2>💻 Our Services</h2>
+                <img
+                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
+                    alt="Website Services"
+                >
 
-<div class="grid">
+                <div class="card-content">
 
+                    <h3>Website Services</h3>
 
-<div class="card">
+                    <p>Website creation and digital solutions.</p>
 
-<img
-src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80"
-alt="Website Services"
->
+                    <div class="price">From ₹499</div>
 
-<div class="card-content">
+                    <button
+                        class="purchase"
+                        onclick="purchase('Website Services', '₹499')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-<h3>Website Services</h3>
-
-<p>Website creation and digital solutions.</p>
-
-<div class="price">From ₹499</div>
-
-<button
-class="purchase"
-onclick="purchase('Website Services','₹499')"
->
-PURCHASE NOW
-</button>
-
-</div>
-</div>
+                </div>
+            </div>
 
 
-<div class="card">
+            <div class="card">
 
-<img
-src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80"
-alt="Digital Support"
->
+                <img
+                    src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80"
+                    alt="Digital Support"
+                >
 
-<div class="card-content">
+                <div class="card-content">
 
-<h3>Digital Support</h3>
+                    <h3>Digital Support</h3>
 
-<p>Digital assistance and support.</p>
+                    <p>Digital assistance and support.</p>
 
-<div class="price">From ₹49</div>
+                    <div class="price">From ₹49</div>
 
-<button
-class="purchase"
-onclick="purchase('Digital Support','₹49')"
->
-PURCHASE NOW
-</button>
+                    <button
+                        class="purchase"
+                        onclick="purchase('Digital Support', '₹49')"
+                    >
+                        PURCHASE NOW
+                    </button>
 
-</div>
-</div>
+                </div>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
+
 </section>
 
 
 <footer>
-
-© 2026 NEXORA Digital Store
-
+    © 2026 NEXORA Digital Store
 </footer>
 
 
 <script>
 
-/* =========================
-   WHATSAPP PURCHASE
-========================= */
-
-function purchase(product, price) {
-
-    const phoneNumber = "918291697606";
-
-    const message =
-        `Hello, I want to Purchase "${product}".`;
-
-    const whatsappURL =
-        "https://wa.me/" +
-        phoneNumber +
-        "?text=" +
-        encodeURIComponent(message);
-
-    window.open(whatsappURL, "_blank");
-}
-
-
-/* =========================
-   SECTION SWITCHING
-========================= */
+/* ================= NAVIGATION ================= */
 
 function showSection(section, button) {
 
@@ -1183,24 +973,21 @@ function showSection(section, button) {
 }
 
 
-/* =========================
-   GAME SEARCH
-========================= */
+/* ================= SEARCH ================= */
 
 function searchGames() {
 
-    const input =
-        document.getElementById("gameSearch")
+    let input = document
+        .getElementById("gameSearch")
         .value
         .toLowerCase();
 
-    const games =
-        document.querySelectorAll(".game-card");
+    let games = document.querySelectorAll(".game-card");
 
     games.forEach(game => {
 
-        const name =
-            game.querySelector("h3")
+        let name = game
+            .querySelector("h3")
             .innerText
             .toLowerCase();
 
@@ -1211,6 +998,27 @@ function searchGames() {
         }
 
     });
+}
+
+
+/* ================= WHATSAPP PURCHASE ================= */
+
+function purchase(product, price) {
+
+    const message =
+        "Hello, I want to Purchase " +
+        product +
+        " for " +
+        price +
+        ".";
+
+    const whatsappURL =
+        "https://wa.me/918291697606?text=" +
+        encodeURIComponent(message);
+
+    /* Opens WhatsApp / WhatsApp Web */
+    window.open(whatsappURL, "_blank");
+
 }
 
 </script>
