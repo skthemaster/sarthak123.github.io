@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>NEXORA - Gaming Store</title>
 
 <style>
@@ -26,55 +25,64 @@ body {
 header {
     position: sticky;
     top: 0;
-    z-index: 1000;
-    background: rgba(5, 8, 22, 0.92);
+    z-index: 100;
+    background: rgba(5,8,22,0.95);
     backdrop-filter: blur(15px);
     padding: 20px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(0,217,255,0.15);
 }
 
 .logo {
-    font-size: 29px;
+    font-size: 28px;
     font-weight: bold;
     color: #00d9ff;
-    letter-spacing: 2px;
-    text-shadow: 0 0 15px rgba(0,217,255,0.6);
+    text-shadow: 0 0 15px rgba(0,217,255,0.7);
 }
 
 .gaming-label {
-    color: #aeb9d6;
+    color: #c7d2fe;
     font-weight: bold;
 }
 
 /* HERO */
 .hero {
-    padding: 100px 7% 75px;
+    padding: 100px 7% 80px;
     text-align: center;
     background:
-        radial-gradient(circle at top, rgba(0,217,255,0.18), transparent 40%),
-        linear-gradient(135deg, #111c52, #07152f);
+        radial-gradient(circle at 50% 20%, rgba(0,217,255,0.25), transparent 35%),
+        linear-gradient(135deg,#111c52,#07152f);
+    animation: heroGlow 5s infinite alternate;
 }
 
 .hero h1 {
-    font-size: clamp(38px, 6vw, 62px);
+    font-size: clamp(38px,6vw,65px);
     margin: 10px 0;
-    animation: fadeDown 0.8s ease;
+    animation: fadeUp 0.8s ease;
 }
 
 .hero p {
     color: #c7d2fe;
-    font-size: 17px;
+    font-size: 18px;
+    animation: fadeUp 1s ease;
 }
 
-@keyframes fadeDown {
+@keyframes heroGlow {
+    from {
+        background-position: 0% 50%;
+    }
+    to {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes fadeUp {
     from {
         opacity: 0;
-        transform: translateY(-25px);
+        transform: translateY(25px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -94,36 +102,37 @@ header {
 /* SEARCH */
 .search {
     width: 100%;
-    padding: 17px;
-    border: 1px solid rgba(255,255,255,0.08);
+    padding: 17px 20px;
+    border: 1px solid rgba(0,217,255,0.2);
     border-radius: 14px;
-    background: #18254b;
+    background: #101936;
     color: white;
     font-size: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     outline: none;
+    transition: 0.3s;
 }
 
 .search:focus {
     border-color: #00d9ff;
-    box-shadow: 0 0 15px rgba(0,217,255,0.2);
+    box-shadow: 0 0 20px rgba(0,217,255,0.2);
 }
 
 /* GRID */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
     gap: 25px;
 }
 
-/* CARD */
+/* CARDS */
 .card {
-    background: linear-gradient(145deg, #101936, #0b1228);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: linear-gradient(145deg,#101936,#0b1229);
     border-radius: 20px;
     overflow: hidden;
-    transition: 0.35s;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+    transition: 0.35s ease;
     animation: cardAppear 0.7s ease;
 }
 
@@ -131,16 +140,15 @@ header {
     transform: translateY(-10px) scale(1.02);
     border-color: rgba(0,217,255,0.5);
     box-shadow:
-        0 15px 40px rgba(0,0,0,0.5),
+        0 15px 45px rgba(0,0,0,0.6),
         0 0 25px rgba(0,217,255,0.12);
 }
 
 @keyframes cardAppear {
     from {
         opacity: 0;
-        transform: translateY(25px);
+        transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -149,7 +157,7 @@ header {
 
 .card img {
     width: 100%;
-    height: 230px;
+    height: 190px;
     object-fit: cover;
     display: block;
     transition: 0.4s;
@@ -181,7 +189,7 @@ header {
     color: #00d9ff;
 }
 
-/* PURCHASE BUTTON */
+/* PURCHASE */
 .purchase {
     width: 100%;
     padding: 14px;
@@ -191,13 +199,13 @@ header {
     color: #111;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.25s;
 }
 
 .purchase:hover {
     background: #00d9ff;
     color: #001018;
-    transform: translateY(-2px);
+    transform: scale(1.03);
     box-shadow: 0 0 20px rgba(0,217,255,0.4);
 }
 
@@ -210,26 +218,30 @@ footer {
     text-align: center;
     padding: 45px;
     color: #8994b5;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255,255,255,0.05);
 }
 
 /* MOBILE */
-@media (max-width: 600px) {
+@media(max-width:600px) {
 
     header {
-        padding: 18px 5%;
+        padding: 17px 5%;
+    }
+
+    .logo {
+        font-size: 24px;
     }
 
     .gaming-label {
         font-size: 14px;
     }
 
-    .hero {
-        padding: 70px 5%;
-    }
-
     .section {
         padding: 40px 5%;
+    }
+
+    .hero {
+        padding: 75px 5%;
     }
 }
 </style>
@@ -241,14 +253,13 @@ footer {
 
     <div class="logo">NEXORA</div>
 
-    <div class="gaming-label">
-        🎮 GAMING STORE
-    </div>
+    <!-- ONLY GAMING — NO OTT OR SERVICES -->
+    <div class="gaming-label">🎮 Gaming Store</div>
 
 </header>
 
 
-<!-- ================= GAMING ================= -->
+<!-- GAMING ONLY -->
 
 <section id="gaming">
 
@@ -257,7 +268,7 @@ footer {
         <h1>LEVEL UP YOUR GAMING</h1>
 
         <p>
-            Popular games and digital gaming products in one place.
+            Discover popular games and digital gaming products in one place.
         </p>
 
     </div>
@@ -270,7 +281,7 @@ footer {
         <input
             type="text"
             class="search"
-            placeholder="Search games..."
+            placeholder="🔍 Search games..."
             onkeyup="searchGames()"
             id="gameSearch"
         >
@@ -280,7 +291,6 @@ footer {
 
 
             <!-- GTA V -->
-
             <div class="card game-card">
 
                 <img
@@ -302,7 +312,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Grand Theft Auto V', '₹999')"
+                        onclick="purchase('Grand Theft Auto V','₹999')"
                     >
                         PURCHASE NOW
                     </button>
@@ -312,7 +322,6 @@ footer {
 
 
             <!-- RDR2 -->
-
             <div class="card game-card">
 
                 <img
@@ -334,7 +343,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Red Dead Redemption 2', '₹1,299')"
+                        onclick="purchase('Red Dead Redemption 2','₹1,299')"
                     >
                         PURCHASE NOW
                     </button>
@@ -344,7 +353,6 @@ footer {
 
 
             <!-- Cyberpunk -->
-
             <div class="card game-card">
 
                 <img
@@ -366,7 +374,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Cyberpunk 2077', '₹1,499')"
+                        onclick="purchase('Cyberpunk 2077','₹1,499')"
                     >
                         PURCHASE NOW
                     </button>
@@ -376,7 +384,6 @@ footer {
 
 
             <!-- Minecraft -->
-
             <div class="card game-card">
 
                 <img
@@ -398,7 +405,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Minecraft', '₹999')"
+                        onclick="purchase('Minecraft','₹999')"
                     >
                         PURCHASE NOW
                     </button>
@@ -408,7 +415,6 @@ footer {
 
 
             <!-- Witcher 3 -->
-
             <div class="card game-card">
 
                 <img
@@ -430,7 +436,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('The Witcher 3', '₹899')"
+                        onclick="purchase('The Witcher 3','₹899')"
                     >
                         PURCHASE NOW
                     </button>
@@ -440,7 +446,6 @@ footer {
 
 
             <!-- Elden Ring -->
-
             <div class="card game-card">
 
                 <img
@@ -462,7 +467,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Elden Ring', '₹2,499')"
+                        onclick="purchase('Elden Ring','₹2,499')"
                     >
                         PURCHASE NOW
                     </button>
@@ -472,7 +477,6 @@ footer {
 
 
             <!-- Hogwarts Legacy -->
-
             <div class="card game-card">
 
                 <img
@@ -494,7 +498,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Hogwarts Legacy', '₹1,999')"
+                        onclick="purchase('Hogwarts Legacy','₹1,999')"
                     >
                         PURCHASE NOW
                     </button>
@@ -504,7 +508,6 @@ footer {
 
 
             <!-- Forza Horizon 5 -->
-
             <div class="card game-card">
 
                 <img
@@ -526,7 +529,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Forza Horizon 5', '₹1,299')"
+                        onclick="purchase('Forza Horizon 5','₹1,299')"
                     >
                         PURCHASE NOW
                     </button>
@@ -536,7 +539,6 @@ footer {
 
 
             <!-- Spider-Man -->
-
             <div class="card game-card">
 
                 <img
@@ -558,7 +560,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Marvel Spider-Man Remastered', '₹2,499')"
+                        onclick="purchase('Marvel Spider-Man Remastered','₹2,499')"
                     >
                         PURCHASE NOW
                     </button>
@@ -568,7 +570,6 @@ footer {
 
 
             <!-- God of War -->
-
             <div class="card game-card">
 
                 <img
@@ -590,7 +591,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('God of War', '₹1,999')"
+                        onclick="purchase('God of War','₹1,999')"
                     >
                         PURCHASE NOW
                     </button>
@@ -599,8 +600,7 @@ footer {
             </div>
 
 
-            <!-- Horizon Zero Dawn -->
-
+            <!-- Horizon -->
             <div class="card game-card">
 
                 <img
@@ -622,7 +622,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Horizon Zero Dawn', '₹999')"
+                        onclick="purchase('Horizon Zero Dawn','₹999')"
                     >
                         PURCHASE NOW
                     </button>
@@ -632,7 +632,6 @@ footer {
 
 
             <!-- Assassin's Creed -->
-
             <div class="card game-card">
 
                 <img
@@ -654,7 +653,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Assassins Creed Odyssey', '₹899')"
+                        onclick="purchase('Assassins Creed Odyssey','₹899')"
                     >
                         PURCHASE NOW
                     </button>
@@ -663,8 +662,7 @@ footer {
             </div>
 
 
-            <!-- Far Cry 6 -->
-
+            <!-- Far Cry -->
             <div class="card game-card">
 
                 <img
@@ -686,7 +684,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Far Cry 6', '₹1,499')"
+                        onclick="purchase('Far Cry 6','₹1,499')"
                     >
                         PURCHASE NOW
                     </button>
@@ -695,8 +693,7 @@ footer {
             </div>
 
 
-            <!-- Resident Evil 4 -->
-
+            <!-- Resident Evil -->
             <div class="card game-card">
 
                 <img
@@ -718,7 +715,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Resident Evil 4', '₹1,799')"
+                        onclick="purchase('Resident Evil 4','₹1,799')"
                     >
                         PURCHASE NOW
                     </button>
@@ -727,8 +724,7 @@ footer {
             </div>
 
 
-            <!-- Watch Dogs 2 -->
-
+            <!-- Watch Dogs -->
             <div class="card game-card">
 
                 <img
@@ -750,7 +746,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Watch Dogs 2', '₹799')"
+                        onclick="purchase('Watch Dogs 2','₹799')"
                     >
                         PURCHASE NOW
                     </button>
@@ -759,8 +755,7 @@ footer {
             </div>
 
 
-            <!-- Need for Speed Heat -->
-
+            <!-- NFS -->
             <div class="card game-card">
 
                 <img
@@ -782,7 +777,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Need for Speed Heat', '₹999')"
+                        onclick="purchase('Need for Speed Heat','₹999')"
                     >
                         PURCHASE NOW
                     </button>
@@ -792,7 +787,6 @@ footer {
 
 
             <!-- Dying Light -->
-
             <div class="card game-card">
 
                 <img
@@ -814,7 +808,7 @@ footer {
 
                     <button
                         class="purchase"
-                        onclick="purchase('Dying Light', '₹699')"
+                        onclick="purchase('Dying Light','₹699')"
                     >
                         PURCHASE NOW
                     </button>
@@ -835,7 +829,7 @@ footer {
 
 <script>
 
-/* SEARCH GAMES */
+/* SEARCH */
 
 function searchGames() {
 
@@ -853,11 +847,8 @@ function searchGames() {
             .innerText
             .toLowerCase();
 
-        if (name.includes(input)) {
-            game.style.display = "block";
-        } else {
-            game.style.display = "none";
-        }
+        game.style.display =
+            name.includes(input) ? "block" : "none";
 
     });
 }
@@ -867,18 +858,22 @@ function searchGames() {
 
 function purchase(product, price) {
 
-    const message =
+    let message =
         "Hello, I want to Purchase " +
         product +
-        " for " +
-        price +
-        ".";
+        ". Price: " +
+        price;
 
-    const whatsappURL =
-        "https://wa.me/918291697606?text=" +
+    let whatsappNumber = "918291697606";
+
+    let whatsappURL =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
         encodeURIComponent(message);
 
     window.open(whatsappURL, "_blank");
+
 }
 
 </script>
