@@ -3,1120 +3,577 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NEXORA — Digital Store</title>
+<title>NEXORA - Digital Store</title>
 
 <style>
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #050816;
     color: white;
-    min-height: 100vh;
-    transition: background .5s ease;
 }
-
-/* =========================
-   THEMES
-========================= */
-
-body.gaming {
-    background:
-        radial-gradient(circle at 20% 10%, #24106e, transparent 35%),
-        radial-gradient(circle at 80% 10%, #006eff, transparent 30%),
-        #05050c;
-}
-
-body.ott {
-    background:
-        radial-gradient(circle at 20% 10%, #680914, transparent 35%),
-        radial-gradient(circle at 80% 10%, #e50914, transparent 30%),
-        #080506;
-}
-
-/* =========================
-   HEADER
-========================= */
 
 header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5, 8, 22, 0.95);
     padding: 20px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(5,5,15,.85);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .logo {
-    font-size: 25px;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #00d9ff;
 }
 
-.gaming .logo {
-    color: #4de1ff;
-}
-
-.ott .logo {
-    color: #ff3545;
-}
-
-nav {
-    display: flex;
-    gap: 8px;
-}
-
-.nav-btn {
+nav button {
     border: none;
-    padding: 11px 20px;
-    border-radius: 25px;
+    background: transparent;
     color: white;
-    background: rgba(255,255,255,.07);
+    padding: 12px 18px;
+    border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
-    transition: .25s;
 }
 
-.nav-btn:hover {
-    transform: translateY(-2px);
-}
-
-.nav-btn.active {
+nav button:hover,
+nav button.active {
     background: white;
     color: #111;
 }
 
-/* =========================
-   MAIN
-========================= */
-
-main {
-    width: 86%;
-    max-width: 1250px;
-    margin: auto;
-}
-
 .hero {
+    padding: 80px 7% 50px;
     text-align: center;
-    padding: 70px 10px 35px;
+    background: linear-gradient(135deg, #111c52, #07152f);
 }
 
 .hero h1 {
-    font-size: clamp(40px,7vw,75px);
-    font-weight: 900;
-    margin-bottom: 18px;
-}
-
-.gaming .hero h1 {
-    background: linear-gradient(90deg,#55eaff,#7467ff);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.ott .hero h1 {
-    background: linear-gradient(90deg,#ff3340,#ff8a00);
-    -webkit-background-clip: text;
-    color: transparent;
+    font-size: 50px;
+    margin: 10px 0;
 }
 
 .hero p {
-    color: #aaa;
-    font-size: 17px;
+    color: #c7d2fe;
 }
 
-.section-title {
+.section {
+    padding: 50px 7%;
+}
+
+.section h2 {
     font-size: 30px;
-    margin: 25px 0;
+    margin-bottom: 25px;
 }
-
-/* =========================
-   SEARCH
-========================= */
 
 .search {
     width: 100%;
-    padding: 16px 20px;
-    margin: 15px 0 30px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,.12);
-    outline: none;
-    background: rgba(255,255,255,.07);
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #18254b;
     color: white;
     font-size: 16px;
+    margin-bottom: 30px;
 }
 
-.search::placeholder {
-    color: #888;
-}
-
-/* =========================
-   PRODUCTS
-========================= */
-
-.products {
+.grid {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 20px;
-    padding-bottom: 80px;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
 }
 
 .card {
-    border: 1px solid rgba(255,255,255,.1);
-    border-radius: 20px;
+    background: #101936;
+    border-radius: 18px;
     overflow: hidden;
-    background: rgba(255,255,255,.06);
-    transition: .3s;
-    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(255,255,255,.35);
+    transform: translateY(-7px);
 }
 
-.poster {
-    height: 230px;
-    display: flex;
-    align-items: flex-end;
-    padding: 18px;
-    position: relative;
-    background-size: cover;
-    background-position: center;
-}
-
-.poster-title {
-    font-size: 21px;
-    font-weight: 900;
-    text-shadow: 0 2px 8px black;
-    position: relative;
-    z-index: 2;
+.card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
 }
 
 .card-content {
     padding: 18px;
 }
 
-.card-content p {
-    color: #999;
-    font-size: 13px;
-    min-height: 38px;
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.card p {
+    color: #aeb9d6;
+    min-height: 42px;
 }
 
 .price {
-    font-size: 21px;
+    font-size: 20px;
     font-weight: bold;
     margin: 15px 0;
 }
 
-.buy {
+.purchase {
     width: 100%;
     padding: 13px;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
-    font-weight: bold;
     background: white;
     color: #111;
-    transition: .2s;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.buy:hover {
-    transform: scale(1.03);
+.purchase:hover {
+    background: #00d9ff;
 }
 
-/* =========================
-   OTT MAIN OPTION
-========================= */
-
-.ott-main-card {
-    max-width: 500px;
-    margin: 20px auto 80px;
-}
-
-.ott-main-poster {
-    height: 280px;
-    display: flex;
-    align-items: flex-end;
-    padding: 25px;
-    border-radius: 22px 22px 0 0;
-    background:
-        linear-gradient(to top,rgba(0,0,0,.95),transparent 65%),
-        radial-gradient(circle at 70% 30%,#ff2939,#5c0610 45%,#120307);
-}
-
-.ott-main-poster h2 {
-    font-size: 30px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal {
+.hidden {
     display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 500;
-    background: rgba(0,0,0,.78);
-    backdrop-filter: blur(8px);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
 }
-
-.modal-box {
-    width: 100%;
-    max-width: 480px;
-    background: #11121c;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 22px;
-    padding: 30px;
-    text-align: center;
-    animation: pop .25s ease;
-}
-
-.modal-box h2 {
-    margin-bottom: 12px;
-}
-
-.modal-box p {
-    color: #aaa;
-    line-height: 1.5;
-    margin-bottom: 15px;
-}
-
-.modal-price {
-    font-size: 25px;
-    font-weight: bold;
-    margin: 20px;
-}
-
-.purchase {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    background: #4de1ff;
-    color: #061018;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
-
-.ott .purchase {
-    background: #ff3949;
-    color: white;
-}
-
-.close {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 12px;
-    background: #292936;
-    color: white;
-    cursor: pointer;
-}
-
-@keyframes pop {
-    from {
-        transform: scale(.8);
-        opacity: 0;
-    }
-
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* =========================
-   FOOTER
-========================= */
 
 footer {
     text-align: center;
-    padding: 35px;
-    border-top: 1px solid rgba(255,255,255,.08);
-    color: #777;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:900px) {
-    .products {
-        grid-template-columns: repeat(2,1fr);
-    }
-}
-
-@media(max-width:600px) {
-
-    header {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    nav {
-        width: 100%;
-        justify-content: center;
-    }
-
-    main {
-        width: 92%;
-    }
-
-    .products {
-        grid-template-columns: 1fr;
-    }
+    padding: 40px;
+    color: #8994b5;
 }
 </style>
 </head>
 
-
-<body class="gaming">
+<body>
 
 <header>
-
     <div class="logo">NEXORA</div>
 
     <nav>
-
-        <button
-            class="nav-btn active"
-            onclick="changeTab('gaming')">
-            🎮 Gaming
-        </button>
-
-        <button
-            class="nav-btn"
-            onclick="changeTab('ott')">
-            📺 OTT
-        </button>
-
+        <button class="active" onclick="showSection('gaming', this)">🎮 Gaming</button>
+        <button onclick="showSection('ott', this)">📺 OTT</button>
+        <button onclick="showSection('services', this)">💻 Services</button>
     </nav>
-
 </header>
 
 
-<main>
+<!-- GAMING -->
 
-<section class="hero">
+<section id="gaming">
 
-    <h1 id="heroTitle">
-        GAME STORE
-    </h1>
+<div class="hero">
+    <h1>LEVEL UP YOUR GAMING</h1>
+    <p>Popular games and digital gaming products in one place.</p>
+</div>
 
-    <p id="heroText">
-        Popular games and digital gaming products in one place.
-    </p>
+<div class="section">
 
+<h2>🔥 Popular Games</h2>
+
+<input
+    type="text"
+    class="search"
+    placeholder="Search games..."
+    onkeyup="searchGames()"
+    id="gameSearch"
+>
+
+<div class="grid" id="gameGrid">
+
+<!-- GTA V -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg">
+    <div class="card-content">
+        <h3>Grand Theft Auto V</h3>
+        <p>Open-world action adventure.</p>
+        <div class="price">₹999</div>
+        <button class="purchase" onclick="purchase('Grand Theft Auto V', '₹999')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- RDR2 -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg">
+    <div class="card-content">
+        <h3>Red Dead Redemption 2</h3>
+        <p>Epic open-world western adventure.</p>
+        <div class="price">₹1,299</div>
+        <button class="purchase" onclick="purchase('Red Dead Redemption 2', '₹1,299')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Cyberpunk -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg">
+    <div class="card-content">
+        <h3>Cyberpunk 2077</h3>
+        <p>Open-world futuristic RPG.</p>
+        <div class="price">₹1,499</div>
+        <button class="purchase" onclick="purchase('Cyberpunk 2077', '₹1,499')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Minecraft -->
+<div class="card game-card">
+    <img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/MC_About_Minecraft_Java-Bedrock_Overview.jpg">
+    <div class="card-content">
+        <h3>Minecraft</h3>
+        <p>Build, explore and survive.</p>
+        <div class="price">₹999</div>
+        <button class="purchase" onclick="purchase('Minecraft', '₹999')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Witcher 3 -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg">
+    <div class="card-content">
+        <h3>The Witcher 3</h3>
+        <p>Fantasy open-world RPG.</p>
+        <div class="price">₹899</div>
+        <button class="purchase" onclick="purchase('The Witcher 3', '₹899')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Elden Ring -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg">
+    <div class="card-content">
+        <h3>Elden Ring</h3>
+        <p>Massive fantasy action RPG.</p>
+        <div class="price">₹2,499</div>
+        <button class="purchase" onclick="purchase('Elden Ring', '₹2,499')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Hogwarts Legacy -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg">
+    <div class="card-content">
+        <h3>Hogwarts Legacy</h3>
+        <p>Explore the wizarding world.</p>
+        <div class="price">₹1,999</div>
+        <button class="purchase" onclick="purchase('Hogwarts Legacy', '₹1,999')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Forza Horizon 5 -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg">
+    <div class="card-content">
+        <h3>Forza Horizon 5</h3>
+        <p>Open-world racing experience.</p>
+        <div class="price">₹1,299</div>
+        <button class="purchase" onclick="purchase('Forza Horizon 5', '₹1,299')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Spider-Man -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg">
+    <div class="card-content">
+        <h3>Marvel's Spider-Man Remastered</h3>
+        <p>Become Spider-Man and protect New York.</p>
+        <div class="price">₹2,499</div>
+        <button class="purchase" onclick="purchase('Marvel Spider-Man Remastered', '₹2,499')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- God of War -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg">
+    <div class="card-content">
+        <h3>God of War</h3>
+        <p>Action-packed Norse adventure.</p>
+        <div class="price">₹1,999</div>
+        <button class="purchase" onclick="purchase('God of War', '₹1,999')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Horizon -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg">
+    <div class="card-content">
+        <h3>Horizon Zero Dawn</h3>
+        <p>Explore a world ruled by machines.</p>
+        <div class="price">₹999</div>
+        <button class="purchase" onclick="purchase('Horizon Zero Dawn', '₹999')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Assassin's Creed -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg">
+    <div class="card-content">
+        <h3>Assassin's Creed Odyssey</h3>
+        <p>Explore ancient Greece.</p>
+        <div class="price">₹899</div>
+        <button class="purchase" onclick="purchase('Assassins Creed Odyssey', '₹899')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Far Cry -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/header.jpg">
+    <div class="card-content">
+        <h3>Far Cry 6</h3>
+        <p>Open-world action adventure.</p>
+        <div class="price">₹1,499</div>
+        <button class="purchase" onclick="purchase('Far Cry 6', '₹1,499')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Resident Evil -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg">
+    <div class="card-content">
+        <h3>Resident Evil 4</h3>
+        <p>Survival horror action.</p>
+        <div class="price">₹1,799</div>
+        <button class="purchase" onclick="purchase('Resident Evil 4', '₹1,799')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Watch Dogs -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg">
+    <div class="card-content">
+        <h3>Watch Dogs 2</h3>
+        <p>Hack your way through San Francisco.</p>
+        <div class="price">₹799</div>
+        <button class="purchase" onclick="purchase('Watch Dogs 2', '₹799')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- NFS -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/header.jpg">
+    <div class="card-content">
+        <h3>Need for Speed Heat</h3>
+        <p>Street racing and high-speed action.</p>
+        <div class="price">₹999</div>
+        <button class="purchase" onclick="purchase('Need for Speed Heat', '₹999')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+<!-- Dying Light -->
+<div class="card game-card">
+    <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/239140/header.jpg">
+    <div class="card-content">
+        <h3>Dying Light</h3>
+        <p>Open-world zombie survival.</p>
+        <div class="price">₹699</div>
+        <button class="purchase" onclick="purchase('Dying Light', '₹699')">
+            PURCHASE NOW
+        </button>
+    </div>
+</div>
+
+</div>
+</div>
 </section>
 
 
-<!-- =========================
-     GAMING
-========================= -->
+<!-- OTT -->
 
-<div id="gamingSection">
+<section id="ott" class="hidden">
 
-    <h2 class="section-title">
-        🔥 Popular Games
-    </h2>
-
-    <input
-        class="search"
-        id="gameSearch"
-        placeholder="Search games..."
-        onkeyup="searchGames()"
-    >
-
-    <section
-        class="products"
-        id="games">
-    </section>
-
+<div class="hero">
+    <h1>STREAMING SUBSCRIPTIONS</h1>
+    <p>Choose your favourite streaming platform.</p>
 </div>
 
+<div class="section">
 
-<!-- =========================
-     OTT
-========================= -->
+<h2>📺 Popular OTT Platforms</h2>
 
-<div
-    id="ottSection"
-    style="display:none;">
+<div class="grid">
 
-    <!-- ONE OTT OPTION -->
-
-    <div
-        id="ottMainOption"
-        class="ott-main-card card"
-        onclick="showOTTPlatforms()">
-
-        <div class="ott-main-poster">
-
-            <h2>
-                📺 Streaming Subscriptions
-            </h2>
-
-        </div>
-
-        <div class="card-content">
-
-            <p>
-                Browse available streaming platforms
-                and subscription options.
-            </p>
-
-            <div class="price">
-                View Platforms
-            </div>
-
-            <button
-                class="buy"
-                onclick="event.stopPropagation(); showOTTPlatforms()">
-
-                EXPLORE OTT
-
-            </button>
-
-        </div>
-
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=800&q=80">
+    <div class="card-content">
+        <h3>Netflix</h3>
+        <p>Movies, series and originals.</p>
+        <div class="price">From ₹149</div>
+        <button class="purchase" onclick="purchase('Netflix Subscription','₹149')">PURCHASE NOW</button>
     </div>
-
-
-    <!-- OTT PLATFORMS -->
-
-    <div
-        id="ottPlatforms"
-        style="display:none;">
-
-        <h2 class="section-title">
-            🍿 Choose Your Platform
-        </h2>
-
-        <input
-            class="search"
-            id="ottSearch"
-            placeholder="Search OTT platforms..."
-            onkeyup="searchOTT()"
-        >
-
-        <section
-            class="products"
-            id="ottProducts">
-        </section>
-
-    </div>
-
 </div>
 
-</main>
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=800&q=80">
+    <div class="card-content">
+        <h3>Prime Video</h3>
+        <p>Movies, shows and originals.</p>
+        <div class="price">From ₹299</div>
+        <button class="purchase" onclick="purchase('Prime Video Subscription','₹299')">PURCHASE NOW</button>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=800&q=80">
+    <div class="card-content">
+        <h3>JioHotstar</h3>
+        <p>Sports, movies and entertainment.</p>
+        <div class="price">From ₹149</div>
+        <button class="purchase" onclick="purchase('JioHotstar Subscription','₹149')">PURCHASE NOW</button>
+    </div>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services" class="hidden">
+
+<div class="hero">
+    <h1>DIGITAL SERVICES</h1>
+    <p>Useful digital services in one place.</p>
+</div>
+
+<div class="section">
+
+<h2>💻 Our Services</h2>
+
+<div class="grid">
+
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80">
+    <div class="card-content">
+        <h3>Website Services</h3>
+        <p>Website creation and digital solutions.</p>
+        <div class="price">From ₹499</div>
+        <button class="purchase" onclick="purchase('Website Services','₹499')">PURCHASE NOW</button>
+    </div>
+</div>
+
+<div class="card">
+    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80">
+    <div class="card-content">
+        <h3>Digital Support</h3>
+        <p>Digital assistance and support.</p>
+        <div class="price">From ₹49</div>
+        <button class="purchase" onclick="purchase('Digital Support','₹49')">PURCHASE NOW</button>
+    </div>
+</div>
+
+</div>
+</div>
+</section>
 
 
 <footer>
-    © 2026 NEXORA — Digital Store
+    © 2026 NEXORA Digital Store
 </footer>
-
-
-<!-- =========================
-     PURCHASE MODAL
-========================= -->
-
-<div
-    class="modal"
-    id="modal">
-
-    <div class="modal-box">
-
-        <h2 id="modalTitle">
-            Product
-        </h2>
-
-        <p id="modalDescription">
-            Product information.
-        </p>
-
-        <div
-            class="modal-price"
-            id="modalPrice">
-            ₹999
-        </div>
-
-        <button
-            class="purchase"
-            onclick="purchase()">
-
-            PURCHASE NOW
-
-        </button>
-
-        <button
-            class="close"
-            onclick="closeModal()">
-
-            CLOSE
-
-        </button>
-
-    </div>
-
-</div>
 
 
 <script>
 
-/* =========================
-   GAMES
-========================= */
+function showSection(section, button) {
 
-const games = [
+    document.getElementById("gaming").classList.add("hidden");
+    document.getElementById("ott").classList.add("hidden");
+    document.getElementById("services").classList.add("hidden");
 
-{
-name:"Grand Theft Auto V",
-price:"₹999",
-description:"Open-world action adventure."
-},
+    document.getElementById(section).classList.remove("hidden");
 
-{
-name:"Red Dead Redemption 2",
-price:"₹1,299",
-description:"Epic open-world western adventure."
-},
+    document.querySelectorAll("nav button").forEach(btn => {
+        btn.classList.remove("active");
+    });
 
-{
-name:"Cyberpunk 2077",
-price:"₹1,499",
-description:"Open-world futuristic RPG."
-},
+    button.classList.add("active");
 
-{
-name:"Minecraft",
-price:"₹999",
-description:"Build, explore and survive."
-},
-
-{
-name:"Marvel's Spider-Man Remastered",
-price:"₹1,499",
-description:"Open-world superhero action."
-},
-
-{
-name:"Marvel's Spider-Man: Miles Morales",
-price:"₹1,299",
-description:"Play as Miles Morales."
-},
-
-{
-name:"Hogwarts Legacy",
-price:"₹1,499",
-description:"Open-world magical adventure."
-},
-
-{
-name:"EA SPORTS FC 26",
-price:"₹2,999",
-description:"Football simulation game."
-},
-
-{
-name:"Forza Horizon 5",
-price:"₹1,499",
-description:"Open-world racing experience."
-},
-
-{
-name:"God of War Ragnarök",
-price:"₹2,999",
-description:"Epic Norse mythology adventure."
-},
-
-{
-name:"Elden Ring",
-price:"₹2,499",
-description:"Massive fantasy action RPG."
-},
-
-{
-name:"Assassin's Creed Shadows",
-price:"₹2,999",
-description:"Action adventure set in feudal Japan."
-},
-
-{
-name:"Resident Evil 4",
-price:"₹1,499",
-description:"Survival horror action game."
-},
-
-{
-name:"Watch Dogs 2",
-price:"₹999",
-description:"Open-world hacking adventure."
-},
-
-{
-name:"Far Cry 6",
-price:"₹1,499",
-description:"Open-world action adventure."
-},
-
-{
-name:"The Witcher 3",
-price:"₹999",
-description:"Massive fantasy RPG adventure."
-}
-
-];
-
-
-/* =========================
-   OTT PLATFORMS
-========================= */
-
-const ottPlatforms = [
-
-{
-name:"Netflix",
-price:"Choose Plan",
-description:"Streaming entertainment subscription.",
-color:"#b20710"
-},
-
-{
-name:"Prime Video",
-price:"Choose Plan",
-description:"Movies, series and entertainment.",
-color:"#087ea4"
-},
-
-{
-name:"JioHotstar",
-price:"Choose Plan",
-description:"Movies, shows and sports streaming.",
-color:"#1464d2"
-},
-
-{
-name:"SonyLIV",
-price:"Choose Plan",
-description:"Entertainment, sports and originals.",
-color:"#172b91"
-},
-
-{
-name:"ZEE5",
-price:"Choose Plan",
-description:"Movies, shows and regional entertainment.",
-color:"#6c16a8"
-},
-
-{
-name:"Crunchyroll",
-price:"Choose Plan",
-description:"Anime streaming subscription.",
-color:"#f47521"
-},
-
-{
-name:"Apple TV+",
-price:"Choose Plan",
-description:"Apple original movies and series.",
-color:"#222222"
-},
-
-{
-name:"YouTube Premium",
-price:"Choose Plan",
-description:"YouTube Premium subscription.",
-color:"#ff0033"
-},
-
-{
-name:"Lionsgate Play",
-price:"Choose Plan",
-description:"Movies and premium series.",
-color:"#5316a3"
-},
-
-{
-name:"Discovery+",
-price:"Choose Plan",
-description:"Documentaries and factual entertainment.",
-color:"#1677c8"
-},
-
-{
-name:"hoichoi",
-price:"Choose Plan",
-description:"Bengali movies and original series.",
-color:"#e52b3b"
-},
-
-{
-name:"Sun NXT",
-price:"Choose Plan",
-description:"South Indian entertainment.",
-color:"#ed7d00"
-}
-
-];
-
-
-/* =========================
-   RENDER GAMES
-========================= */
-
-function renderGames(list = games) {
-
-    const container =
-        document.getElementById("games");
-
-    container.innerHTML = "";
-
-    list.forEach((game,index) => {
-
-        const card =
-            document.createElement("div");
-
-        card.className = "card";
-
-        card.onclick = () =>
-            openModal(game);
-
-        card.innerHTML = `
-
-            <div
-                class="poster"
-                style="
-                background:
-                linear-gradient(
-                    to top,
-                    rgba(0,0,0,.95),
-                    transparent 65%
-                ),
-                linear-gradient(
-                    ${120 + index * 7}deg,
-                    #111827,
-                    #2563eb,
-                    #312e81
-                );
-                ">
-
-                <div class="poster-title">
-                    ${game.name}
-                </div>
-
-            </div>
-
-            <div class="card-content">
-
-                <p>
-                    ${game.description}
-                </p>
-
-                <div class="price">
-                    ${game.price}
-                </div>
-
-                <button
-                    class="buy"
-                    onclick="
-                    event.stopPropagation();
-                    openModal(games[${index}])
-                    ">
-
-                    PURCHASE NOW
-
-                </button>
-
-            </div>
-        `;
-
-        container.appendChild(card);
-
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
     });
 }
 
 
-/* =========================
-   SEARCH GAMES
-========================= */
-
 function searchGames() {
 
-    const query =
-        document
+    let input = document
         .getElementById("gameSearch")
         .value
         .toLowerCase();
 
-    const filtered =
-        games.filter(game =>
-            game.name
-            .toLowerCase()
-            .includes(query)
-        );
+    let games = document.querySelectorAll(".game-card");
 
-    renderGames(filtered);
-}
+    games.forEach(game => {
 
+        let name = game
+            .querySelector("h3")
+            .innerText
+            .toLowerCase();
 
-/* =========================
-   SHOW OTT PLATFORMS
-========================= */
-
-function showOTTPlatforms() {
-
-    document
-        .getElementById("ottMainOption")
-        .style.display = "none";
-
-    document
-        .getElementById("ottPlatforms")
-        .style.display = "block";
-
-    renderOTT();
-
-}
-
-
-/* =========================
-   RENDER OTT
-========================= */
-
-function renderOTT(list = ottPlatforms) {
-
-    const container =
-        document.getElementById("ottProducts");
-
-    container.innerHTML = "";
-
-    list.forEach((platform,index) => {
-
-        const card =
-            document.createElement("div");
-
-        card.className = "card";
-
-        card.onclick = () =>
-            openModal(platform);
-
-        card.innerHTML = `
-
-            <div
-                class="poster"
-                style="
-                background:
-                linear-gradient(
-                    to top,
-                    rgba(0,0,0,.95),
-                    transparent 60%
-                ),
-                linear-gradient(
-                    135deg,
-                    ${platform.color},
-                    #111
-                );
-                ">
-
-                <div class="poster-title">
-                    ${platform.name}
-                </div>
-
-            </div>
-
-            <div class="card-content">
-
-                <p>
-                    ${platform.description}
-                </p>
-
-                <div class="price">
-                    ${platform.price}
-                </div>
-
-                <button
-                    class="buy"
-                    onclick="
-                    event.stopPropagation();
-                    openModal(ottPlatforms[${index}])
-                    ">
-
-                    PURCHASE NOW
-
-                </button>
-
-            </div>
-
-        `;
-
-        container.appendChild(card);
+        if (name.includes(input)) {
+            game.style.display = "block";
+        } else {
+            game.style.display = "none";
+        }
 
     });
 }
 
 
-/* =========================
-   SEARCH OTT
-========================= */
-
-function searchOTT() {
-
-    const query =
-        document
-        .getElementById("ottSearch")
-        .value
-        .toLowerCase();
-
-    const filtered =
-        ottPlatforms.filter(platform =>
-            platform.name
-            .toLowerCase()
-            .includes(query)
-        );
-
-    renderOTT(filtered);
-}
-
-
-/* =========================
-   TAB SWITCHING
-========================= */
-
-function changeTab(tab) {
-
-    document.body.classList.remove(
-        "gaming",
-        "ott"
-    );
-
-    document.body.classList.add(tab);
-
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(button =>
-            button.classList.remove("active")
-        );
-
-
-    if(tab === "gaming") {
-
-        document
-            .querySelectorAll(".nav-btn")[0]
-            .classList.add("active");
-
-        document
-            .getElementById("gamingSection")
-            .style.display = "block";
-
-        document
-            .getElementById("ottSection")
-            .style.display = "none";
-
-        document
-            .getElementById("heroTitle")
-            .textContent = "GAME STORE";
-
-        document
-            .getElementById("heroText")
-            .textContent =
-            "Popular games and digital gaming products in one place.";
-
-    }
-
-
-    if(tab === "ott") {
-
-        document
-            .querySelectorAll(".nav-btn")[1]
-            .classList.add("active");
-
-        document
-            .getElementById("gamingSection")
-            .style.display = "none";
-
-        document
-            .getElementById("ottSection")
-            .style.display = "block";
-
-        document
-            .getElementById("heroTitle")
-            .textContent =
-            "STREAMING SUBSCRIPTIONS";
-
-        document
-            .getElementById("heroText")
-            .textContent =
-            "Choose your preferred entertainment platform.";
-
-    }
-
-}
-
-
-/* =========================
-   MODAL
-========================= */
-
-function openModal(product) {
-
-    document
-        .getElementById("modalTitle")
-        .textContent = product.name;
-
-    document
-        .getElementById("modalDescription")
-        .textContent =
-        product.description;
-
-    document
-        .getElementById("modalPrice")
-        .textContent =
-        product.price;
-
-    document
-        .getElementById("modal")
-        .style.display = "flex";
-
-}
-
-
-function closeModal() {
-
-    document
-        .getElementById("modal")
-        .style.display = "none";
-
-}
-
-
-function purchase() {
+function purchase(product, price) {
 
     alert(
-        "Purchase selected!\n\n" +
-        "Secure checkout will be connected in the next step."
+        "You selected:\n\n" +
+        product +
+        "\nPrice: " +
+        price +
+        "\n\nPurchase checkout will be added next."
     );
 
 }
-
-
-/* =========================
-   INITIAL LOAD
-========================= */
-
-renderGames();
 
 </script>
 
