@@ -15,10 +15,27 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #070711;
     color: white;
     min-height: 100vh;
-    transition: background 0.5s ease;
+    transition: background .5s ease;
+}
+
+/* =========================
+   THEMES
+========================= */
+
+body.gaming {
+    background:
+        radial-gradient(circle at 20% 10%, #24106e, transparent 35%),
+        radial-gradient(circle at 80% 10%, #006eff, transparent 30%),
+        #05050c;
+}
+
+body.ott {
+    background:
+        radial-gradient(circle at 20% 10%, #680914, transparent 35%),
+        radial-gradient(circle at 80% 10%, #e50914, transparent 30%),
+        #080506;
 }
 
 /* =========================
@@ -26,24 +43,30 @@ body {
 ========================= */
 
 header {
-    width: 100%;
-    padding: 22px 7%;
+    padding: 20px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(5,5,15,0.85);
+    background: rgba(5,5,15,.85);
     backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .logo {
     font-size: 25px;
     font-weight: 900;
     letter-spacing: 2px;
-    color: #48d9ff;
+}
+
+.gaming .logo {
+    color: #4de1ff;
+}
+
+.ott .logo {
+    color: #ff3545;
 }
 
 nav {
@@ -53,13 +76,13 @@ nav {
 
 .nav-btn {
     border: none;
-    padding: 11px 18px;
+    padding: 11px 20px;
     border-radius: 25px;
     color: white;
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,.07);
     cursor: pointer;
     font-weight: bold;
-    transition: 0.3s;
+    transition: .25s;
 }
 
 .nav-btn:hover {
@@ -83,42 +106,49 @@ main {
 
 .hero {
     text-align: center;
-    padding: 90px 10px 55px;
-    animation: fadeIn 0.5s ease;
+    padding: 70px 10px 35px;
 }
 
 .hero h1 {
-    font-size: clamp(40px, 7vw, 78px);
-    line-height: 1;
+    font-size: clamp(40px,7vw,75px);
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+}
+
+.gaming .hero h1 {
+    background: linear-gradient(90deg,#55eaff,#7467ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.ott .hero h1 {
+    background: linear-gradient(90deg,#ff3340,#ff8a00);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
 .hero p {
-    color: #b9b9c8;
-    font-size: 18px;
-    max-width: 650px;
-    margin: auto;
+    color: #aaa;
+    font-size: 17px;
+}
+
+.section-title {
+    font-size: 30px;
+    margin: 25px 0;
 }
 
 /* =========================
    SEARCH
 ========================= */
 
-.search-area {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 35px;
-}
-
 .search {
     width: 100%;
-    max-width: 600px;
     padding: 16px 20px;
+    margin: 15px 0 30px;
     border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,.12);
     outline: none;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,.07);
     color: white;
     font-size: 16px;
 }
@@ -133,64 +163,179 @@ main {
 
 .products {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
     padding-bottom: 80px;
 }
 
 .card {
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 22px;
-    padding: 28px;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(15px);
-    transition: 0.35s;
-    position: relative;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px;
     overflow: hidden;
+    background: rgba(255,255,255,.06);
+    transition: .3s;
+    cursor: pointer;
 }
 
 .card:hover {
     transform: translateY(-8px);
-    border-color: rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,.35);
 }
 
-.icon {
-    font-size: 42px;
-    margin-bottom: 20px;
+.poster {
+    height: 230px;
+    display: flex;
+    align-items: flex-end;
+    padding: 18px;
+    position: relative;
+    background-size: cover;
+    background-position: center;
 }
 
-.card h3 {
-    font-size: 22px;
-    margin-bottom: 10px;
+.poster-title {
+    font-size: 21px;
+    font-weight: 900;
+    text-shadow: 0 2px 8px black;
+    position: relative;
+    z-index: 2;
 }
 
-.card p {
-    color: #aaaaba;
-    min-height: 45px;
-    line-height: 1.5;
+.card-content {
+    padding: 18px;
+}
+
+.card-content p {
+    color: #999;
+    font-size: 13px;
+    min-height: 38px;
 }
 
 .price {
-    font-size: 24px;
-    font-weight: 900;
-    margin: 22px 0;
+    font-size: 21px;
+    font-weight: bold;
+    margin: 15px 0;
 }
 
 .buy {
     width: 100%;
+    padding: 13px;
     border: none;
-    padding: 14px;
-    border-radius: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
     background: white;
     color: #111;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.25s;
+    transition: .2s;
 }
 
 .buy:hover {
     transform: scale(1.03);
+}
+
+/* =========================
+   OTT MAIN OPTION
+========================= */
+
+.ott-main-card {
+    max-width: 500px;
+    margin: 20px auto 80px;
+}
+
+.ott-main-poster {
+    height: 280px;
+    display: flex;
+    align-items: flex-end;
+    padding: 25px;
+    border-radius: 22px 22px 0 0;
+    background:
+        linear-gradient(to top,rgba(0,0,0,.95),transparent 65%),
+        radial-gradient(circle at 70% 30%,#ff2939,#5c0610 45%,#120307);
+}
+
+.ott-main-poster h2 {
+    font-size: 30px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(0,0,0,.78);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-box {
+    width: 100%;
+    max-width: 480px;
+    background: #11121c;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 22px;
+    padding: 30px;
+    text-align: center;
+    animation: pop .25s ease;
+}
+
+.modal-box h2 {
+    margin-bottom: 12px;
+}
+
+.modal-box p {
+    color: #aaa;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.modal-price {
+    font-size: 25px;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.purchase {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #4de1ff;
+    color: #061018;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.ott .purchase {
+    background: #ff3949;
+    color: white;
+}
+
+.close {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    background: #292936;
+    color: white;
+    cursor: pointer;
+}
+
+@keyframes pop {
+    from {
+        transform: scale(.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 /* =========================
@@ -200,125 +345,23 @@ main {
 footer {
     text-align: center;
     padding: 35px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    border-top: 1px solid rgba(255,255,255,.08);
     color: #777;
 }
-
-/* =========================
-   THEMES
-========================= */
-
-body.gaming {
-    background:
-        radial-gradient(circle at 20% 20%, #21106b 0%, transparent 35%),
-        radial-gradient(circle at 80% 20%, #006dff 0%, transparent 30%),
-        #05050c;
-}
-
-body.gaming .logo {
-    color: #4de1ff;
-}
-
-body.gaming .hero h1 {
-    background: linear-gradient(90deg,#55eaff,#7467ff);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-body.gaming .card {
-    background: linear-gradient(
-        145deg,
-        rgba(78,57,190,.25),
-        rgba(12,30,70,.35)
-    );
-}
-
-
-/* OTT */
-
-body.ott {
-    background:
-        radial-gradient(circle at 20% 20%, #6d0715 0%, transparent 35%),
-        radial-gradient(circle at 80% 20%, #e50914 0%, transparent 30%),
-        #080506;
-}
-
-body.ott .logo {
-    color: #ff3b47;
-}
-
-body.ott .hero h1 {
-    background: linear-gradient(90deg,#ff3340,#ff8a00);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-body.ott .card {
-    background: linear-gradient(
-        145deg,
-        rgba(130,10,20,.35),
-        rgba(45,10,15,.4)
-    );
-}
-
-
-/* SERVICES */
-
-body.services {
-    background:
-        radial-gradient(circle at 20% 20%, #075e4f 0%, transparent 35%),
-        radial-gradient(circle at 80% 20%, #008b72 0%, transparent 30%),
-        #030909;
-}
-
-body.services .logo {
-    color: #3cffc5;
-}
-
-body.services .hero h1 {
-    background: linear-gradient(90deg,#36ffd0,#48a7ff);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-body.services .card {
-    background: linear-gradient(
-        145deg,
-        rgba(0,130,110,.25),
-        rgba(5,40,40,.4)
-    );
-}
-
-
-/* =========================
-   ANIMATION
-========================= */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade {
-    animation: fadeIn 0.45s ease;
-}
-
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width: 800px) {
+@media(max-width:900px) {
+    .products {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px) {
 
     header {
-        padding: 18px 4%;
         flex-direction: column;
         gap: 15px;
     }
@@ -328,17 +371,8 @@ body.services .card {
         justify-content: center;
     }
 
-    .nav-btn {
-        padding: 10px 12px;
-        font-size: 13px;
-    }
-
     main {
         width: 92%;
-    }
-
-    .hero {
-        padding-top: 60px;
     }
 
     .products {
@@ -348,6 +382,7 @@ body.services .card {
 </style>
 </head>
 
+
 <body class="gaming">
 
 <header>
@@ -355,17 +390,19 @@ body.services .card {
     <div class="logo">NEXORA</div>
 
     <nav>
-        <button class="nav-btn active" onclick="changeTab('gaming')">
+
+        <button
+            class="nav-btn active"
+            onclick="changeTab('gaming')">
             🎮 Gaming
         </button>
 
-        <button class="nav-btn" onclick="changeTab('ott')">
+        <button
+            class="nav-btn"
+            onclick="changeTab('ott')">
             📺 OTT
         </button>
 
-        <button class="nav-btn" onclick="changeTab('services')">
-            🛠️ Services
-        </button>
     </nav>
 
 </header>
@@ -376,30 +413,113 @@ body.services .card {
 <section class="hero">
 
     <h1 id="heroTitle">
-        LEVEL UP YOUR GAMING
+        GAME STORE
     </h1>
 
     <p id="heroText">
-        Digital gaming products and legitimate game-related services in one place.
+        Popular games and digital gaming products in one place.
     </p>
 
 </section>
 
 
-<div class="search-area">
+<!-- =========================
+     GAMING
+========================= -->
+
+<div id="gamingSection">
+
+    <h2 class="section-title">
+        🔥 Popular Games
+    </h2>
 
     <input
-        type="text"
-        id="search"
         class="search"
-        placeholder="Search products..."
-        onkeyup="searchProducts()"
+        id="gameSearch"
+        placeholder="Search games..."
+        onkeyup="searchGames()"
     >
+
+    <section
+        class="products"
+        id="games">
+    </section>
 
 </div>
 
 
-<section class="products" id="products"></section>
+<!-- =========================
+     OTT
+========================= -->
+
+<div
+    id="ottSection"
+    style="display:none;">
+
+    <!-- ONE OTT OPTION -->
+
+    <div
+        id="ottMainOption"
+        class="ott-main-card card"
+        onclick="showOTTPlatforms()">
+
+        <div class="ott-main-poster">
+
+            <h2>
+                📺 Streaming Subscriptions
+            </h2>
+
+        </div>
+
+        <div class="card-content">
+
+            <p>
+                Browse available streaming platforms
+                and subscription options.
+            </p>
+
+            <div class="price">
+                View Platforms
+            </div>
+
+            <button
+                class="buy"
+                onclick="event.stopPropagation(); showOTTPlatforms()">
+
+                EXPLORE OTT
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- OTT PLATFORMS -->
+
+    <div
+        id="ottPlatforms"
+        style="display:none;">
+
+        <h2 class="section-title">
+            🍿 Choose Your Platform
+        </h2>
+
+        <input
+            class="search"
+            id="ottSearch"
+            placeholder="Search OTT platforms..."
+            onkeyup="searchOTT()"
+        >
+
+        <section
+            class="products"
+            id="ottProducts">
+        </section>
+
+    </div>
+
+</div>
 
 </main>
 
@@ -409,302 +529,594 @@ body.services .card {
 </footer>
 
 
+<!-- =========================
+     PURCHASE MODAL
+========================= -->
+
+<div
+    class="modal"
+    id="modal">
+
+    <div class="modal-box">
+
+        <h2 id="modalTitle">
+            Product
+        </h2>
+
+        <p id="modalDescription">
+            Product information.
+        </p>
+
+        <div
+            class="modal-price"
+            id="modalPrice">
+            ₹999
+        </div>
+
+        <button
+            class="purchase"
+            onclick="purchase()">
+
+            PURCHASE NOW
+
+        </button>
+
+        <button
+            class="close"
+            onclick="closeModal()">
+
+            CLOSE
+
+        </button>
+
+    </div>
+
+</div>
+
+
 <script>
 
-const data = {
+/* =========================
+   GAMES
+========================= */
 
-    gaming: {
+const games = [
 
-        title: "LEVEL UP YOUR GAMING",
+{
+name:"Grand Theft Auto V",
+price:"₹999",
+description:"Open-world action adventure."
+},
 
-        description:
-        "Digital gaming products and legitimate game-related services in one place.",
+{
+name:"Red Dead Redemption 2",
+price:"₹1,299",
+description:"Epic open-world western adventure."
+},
 
-        products: [
+{
+name:"Cyberpunk 2077",
+price:"₹1,499",
+description:"Open-world futuristic RPG."
+},
 
-            {
-                icon: "🎮",
-                name: "Game Store",
-                description: "Digital games and legitimate game-related purchases.",
-                price: "₹99"
-            },
+{
+name:"Minecraft",
+price:"₹999",
+description:"Build, explore and survive."
+},
 
-            {
-                icon: "🕹️",
-                name: "Gaming Services",
-                description: "Gaming-related digital services and support.",
-                price: "₹49"
-            },
+{
+name:"Marvel's Spider-Man Remastered",
+price:"₹1,499",
+description:"Open-world superhero action."
+},
 
-            {
-                icon: "🎁",
-                name: "Gaming Gift Cards",
-                description: "Authorized digital gift cards and gaming credits.",
-                price: "₹100"
-            },
+{
+name:"Marvel's Spider-Man: Miles Morales",
+price:"₹1,299",
+description:"Play as Miles Morales."
+},
 
-            {
-                icon: "💎",
-                name: "Game Credits",
-                description: "Purchase credits for supported games.",
-                price: "₹99"
-            },
+{
+name:"Hogwarts Legacy",
+price:"₹1,499",
+description:"Open-world magical adventure."
+},
 
-            {
-                icon: "🏆",
-                name: "Tournament Entry",
-                description: "Digital tournament and gaming event access.",
-                price: "₹49"
-            },
+{
+name:"EA SPORTS FC 26",
+price:"₹2,999",
+description:"Football simulation game."
+},
 
-            {
-                icon: "🎨",
-                name: "Gaming Graphics",
-                description: "Custom gaming banners, thumbnails and artwork.",
-                price: "₹149"
-            }
+{
+name:"Forza Horizon 5",
+price:"₹1,499",
+description:"Open-world racing experience."
+},
 
-        ]
+{
+name:"God of War Ragnarök",
+price:"₹2,999",
+description:"Epic Norse mythology adventure."
+},
 
-    },
+{
+name:"Elden Ring",
+price:"₹2,499",
+description:"Massive fantasy action RPG."
+},
 
+{
+name:"Assassin's Creed Shadows",
+price:"₹2,999",
+description:"Action adventure set in feudal Japan."
+},
 
-    ott: {
+{
+name:"Resident Evil 4",
+price:"₹1,499",
+description:"Survival horror action game."
+},
 
-        title: "YOUR ENTERTAINMENT HUB",
+{
+name:"Watch Dogs 2",
+price:"₹999",
+description:"Open-world hacking adventure."
+},
 
-        description:
-        "Browse authorized streaming subscriptions and digital entertainment services.",
+{
+name:"Far Cry 6",
+price:"₹1,499",
+description:"Open-world action adventure."
+},
 
-        products: [
-
-            {
-                icon: "📺",
-                name: "Streaming Subscription",
-                description: "Authorized streaming subscription plans.",
-                price: "₹149"
-            },
-
-            {
-                icon: "🎬",
-                name: "Movie & Series Pack",
-                description: "Digital entertainment packages from authorized providers.",
-                price: "₹199"
-            },
-
-            {
-                icon: "🍿",
-                name: "Entertainment Pack",
-                description: "Choose from available entertainment services.",
-                price: "₹249"
-            },
-
-            {
-                icon: "🎥",
-                name: "Premium Entertainment",
-                description: "Premium authorized streaming options.",
-                price: "₹299"
-            },
-
-            {
-                icon: "👨‍👩‍👧‍👦",
-                name: "Family Plan",
-                description: "Eligible family subscription options.",
-                price: "₹399"
-            },
-
-            {
-                icon: "⭐",
-                name: "Entertainment Support",
-                description: "Help choosing and setting up supported services.",
-                price: "₹49"
-            }
-
-        ]
-
-    },
-
-
-    services: {
-
-        title: "DIGITAL SERVICES",
-
-        description:
-        "Creative and digital services to help your online presence grow.",
-
-        products: [
-
-            {
-                icon: "🎨",
-                name: "Social Media Design",
-                description: "Professional posts, banners and social graphics.",
-                price: "₹99"
-            },
-
-            {
-                icon: "🖼️",
-                name: "Thumbnail Design",
-                description: "Custom thumbnails for YouTube and social platforms.",
-                price: "₹79"
-            },
-
-            {
-                icon: "🎬",
-                name: "Video Editing",
-                description: "Short-form video editing for social media.",
-                price: "₹199"
-            },
-
-            {
-                icon: "✍️",
-                name: "Caption & Copy",
-                description: "Captions and promotional copy for your content.",
-                price: "₹49"
-            },
-
-            {
-                icon: "🚀",
-                name: "Social Media Promotion",
-                description: "Legitimate promotional strategies for your content.",
-                price: "₹149"
-            },
-
-            {
-                icon: "💻",
-                name: "Website Design",
-                description: "Simple websites and landing pages for businesses.",
-                price: "₹499"
-            }
-
-        ]
-
-    }
-
-};
-
-
-let currentTab = "gaming";
-
-
-function changeTab(tab) {
-
-    currentTab = tab;
-
-    const body = document.body;
-
-    body.classList.remove("gaming");
-    body.classList.remove("ott");
-    body.classList.remove("services");
-
-    body.classList.add(tab);
-
-    document.querySelectorAll(".nav-btn").forEach(btn => {
-        btn.classList.remove("active");
-    });
-
-    if(tab === "gaming") {
-        document.querySelectorAll(".nav-btn")[0].classList.add("active");
-    }
-
-    if(tab === "ott") {
-        document.querySelectorAll(".nav-btn")[1].classList.add("active");
-    }
-
-    if(tab === "services") {
-        document.querySelectorAll(".nav-btn")[2].classList.add("active");
-    }
-
-    document.getElementById("heroTitle").textContent =
-        data[tab].title;
-
-    document.getElementById("heroText").textContent =
-        data[tab].description;
-
-    document.getElementById("search").value = "";
-
-    renderProducts(data[tab].products);
+{
+name:"The Witcher 3",
+price:"₹999",
+description:"Massive fantasy RPG adventure."
 }
 
+];
 
-function renderProducts(products) {
 
-    const container = document.getElementById("products");
+/* =========================
+   OTT PLATFORMS
+========================= */
+
+const ottPlatforms = [
+
+{
+name:"Netflix",
+price:"Choose Plan",
+description:"Streaming entertainment subscription.",
+color:"#b20710"
+},
+
+{
+name:"Prime Video",
+price:"Choose Plan",
+description:"Movies, series and entertainment.",
+color:"#087ea4"
+},
+
+{
+name:"JioHotstar",
+price:"Choose Plan",
+description:"Movies, shows and sports streaming.",
+color:"#1464d2"
+},
+
+{
+name:"SonyLIV",
+price:"Choose Plan",
+description:"Entertainment, sports and originals.",
+color:"#172b91"
+},
+
+{
+name:"ZEE5",
+price:"Choose Plan",
+description:"Movies, shows and regional entertainment.",
+color:"#6c16a8"
+},
+
+{
+name:"Crunchyroll",
+price:"Choose Plan",
+description:"Anime streaming subscription.",
+color:"#f47521"
+},
+
+{
+name:"Apple TV+",
+price:"Choose Plan",
+description:"Apple original movies and series.",
+color:"#222222"
+},
+
+{
+name:"YouTube Premium",
+price:"Choose Plan",
+description:"YouTube Premium subscription.",
+color:"#ff0033"
+},
+
+{
+name:"Lionsgate Play",
+price:"Choose Plan",
+description:"Movies and premium series.",
+color:"#5316a3"
+},
+
+{
+name:"Discovery+",
+price:"Choose Plan",
+description:"Documentaries and factual entertainment.",
+color:"#1677c8"
+},
+
+{
+name:"hoichoi",
+price:"Choose Plan",
+description:"Bengali movies and original series.",
+color:"#e52b3b"
+},
+
+{
+name:"Sun NXT",
+price:"Choose Plan",
+description:"South Indian entertainment.",
+color:"#ed7d00"
+}
+
+];
+
+
+/* =========================
+   RENDER GAMES
+========================= */
+
+function renderGames(list = games) {
+
+    const container =
+        document.getElementById("games");
 
     container.innerHTML = "";
 
-    products.forEach(product => {
+    list.forEach((game,index) => {
 
-        const card = document.createElement("div");
+        const card =
+            document.createElement("div");
 
-        card.className = "card fade";
+        card.className = "card";
+
+        card.onclick = () =>
+            openModal(game);
 
         card.innerHTML = `
 
-            <div class="icon">
-                ${product.icon}
+            <div
+                class="poster"
+                style="
+                background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.95),
+                    transparent 65%
+                ),
+                linear-gradient(
+                    ${120 + index * 7}deg,
+                    #111827,
+                    #2563eb,
+                    #312e81
+                );
+                ">
+
+                <div class="poster-title">
+                    ${game.name}
+                </div>
+
             </div>
 
-            <h3>
-                ${product.name}
-            </h3>
+            <div class="card-content">
 
-            <p>
-                ${product.description}
-            </p>
+                <p>
+                    ${game.description}
+                </p>
 
-            <div class="price">
-                From ${product.price}
+                <div class="price">
+                    ${game.price}
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="
+                    event.stopPropagation();
+                    openModal(games[${index}])
+                    ">
+
+                    PURCHASE NOW
+
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(card);
+
+    });
+}
+
+
+/* =========================
+   SEARCH GAMES
+========================= */
+
+function searchGames() {
+
+    const query =
+        document
+        .getElementById("gameSearch")
+        .value
+        .toLowerCase();
+
+    const filtered =
+        games.filter(game =>
+            game.name
+            .toLowerCase()
+            .includes(query)
+        );
+
+    renderGames(filtered);
+}
+
+
+/* =========================
+   SHOW OTT PLATFORMS
+========================= */
+
+function showOTTPlatforms() {
+
+    document
+        .getElementById("ottMainOption")
+        .style.display = "none";
+
+    document
+        .getElementById("ottPlatforms")
+        .style.display = "block";
+
+    renderOTT();
+
+}
+
+
+/* =========================
+   RENDER OTT
+========================= */
+
+function renderOTT(list = ottPlatforms) {
+
+    const container =
+        document.getElementById("ottProducts");
+
+    container.innerHTML = "";
+
+    list.forEach((platform,index) => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "card";
+
+        card.onclick = () =>
+            openModal(platform);
+
+        card.innerHTML = `
+
+            <div
+                class="poster"
+                style="
+                background:
+                linear-gradient(
+                    to top,
+                    rgba(0,0,0,.95),
+                    transparent 60%
+                ),
+                linear-gradient(
+                    135deg,
+                    ${platform.color},
+                    #111
+                );
+                ">
+
+                <div class="poster-title">
+                    ${platform.name}
+                </div>
+
             </div>
 
-            <button
-                class="buy"
-                onclick="buyProduct('${product.name}')"
-            >
-                Buy Now
-            </button>
+            <div class="card-content">
+
+                <p>
+                    ${platform.description}
+                </p>
+
+                <div class="price">
+                    ${platform.price}
+                </div>
+
+                <button
+                    class="buy"
+                    onclick="
+                    event.stopPropagation();
+                    openModal(ottPlatforms[${index}])
+                    ">
+
+                    PURCHASE NOW
+
+                </button>
+
+            </div>
 
         `;
 
         container.appendChild(card);
 
     });
-
 }
 
 
-function searchProducts() {
+/* =========================
+   SEARCH OTT
+========================= */
+
+function searchOTT() {
 
     const query =
-        document.getElementById("search").value.toLowerCase();
+        document
+        .getElementById("ottSearch")
+        .value
+        .toLowerCase();
 
-    const products =
-        data[currentTab].products.filter(product =>
-
-            product.name.toLowerCase().includes(query) ||
-
-            product.description.toLowerCase().includes(query)
-
+    const filtered =
+        ottPlatforms.filter(platform =>
+            platform.name
+            .toLowerCase()
+            .includes(query)
         );
 
-    renderProducts(products);
+    renderOTT(filtered);
+}
+
+
+/* =========================
+   TAB SWITCHING
+========================= */
+
+function changeTab(tab) {
+
+    document.body.classList.remove(
+        "gaming",
+        "ott"
+    );
+
+    document.body.classList.add(tab);
+
+    document
+        .querySelectorAll(".nav-btn")
+        .forEach(button =>
+            button.classList.remove("active")
+        );
+
+
+    if(tab === "gaming") {
+
+        document
+            .querySelectorAll(".nav-btn")[0]
+            .classList.add("active");
+
+        document
+            .getElementById("gamingSection")
+            .style.display = "block";
+
+        document
+            .getElementById("ottSection")
+            .style.display = "none";
+
+        document
+            .getElementById("heroTitle")
+            .textContent = "GAME STORE";
+
+        document
+            .getElementById("heroText")
+            .textContent =
+            "Popular games and digital gaming products in one place.";
+
+    }
+
+
+    if(tab === "ott") {
+
+        document
+            .querySelectorAll(".nav-btn")[1]
+            .classList.add("active");
+
+        document
+            .getElementById("gamingSection")
+            .style.display = "none";
+
+        document
+            .getElementById("ottSection")
+            .style.display = "block";
+
+        document
+            .getElementById("heroTitle")
+            .textContent =
+            "STREAMING SUBSCRIPTIONS";
+
+        document
+            .getElementById("heroText")
+            .textContent =
+            "Choose your preferred entertainment platform.";
+
+    }
 
 }
 
 
-function buyProduct(name) {
+/* =========================
+   MODAL
+========================= */
+
+function openModal(product) {
+
+    document
+        .getElementById("modalTitle")
+        .textContent = product.name;
+
+    document
+        .getElementById("modalDescription")
+        .textContent =
+        product.description;
+
+    document
+        .getElementById("modalPrice")
+        .textContent =
+        product.price;
+
+    document
+        .getElementById("modal")
+        .style.display = "flex";
+
+}
+
+
+function closeModal() {
+
+    document
+        .getElementById("modal")
+        .style.display = "none";
+
+}
+
+
+function purchase() {
 
     alert(
-        "You selected: " +
-        name +
-        "\n\nThe secure checkout system will be added next."
+        "Purchase selected!\n\n" +
+        "Secure checkout will be connected in the next step."
     );
 
 }
 
 
-/* Load Gaming page initially */
+/* =========================
+   INITIAL LOAD
+========================= */
 
-renderProducts(data.gaming.products);
+renderGames();
 
 </script>
 
