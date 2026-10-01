@@ -3,876 +3,2076 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXORA - Gaming Store</title>
+
+<title>NEXORA — Gaming Store</title>
 
 <style>
-* {
-    box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #050816;
-    color: white;
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#030712;
+    color:white;
+    overflow-x:hidden;
 }
 
-/* HEADER */
-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(5,8,22,0.95);
-    backdrop-filter: blur(15px);
-    padding: 20px 7%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(0,217,255,0.15);
-}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-2;
 
-.logo {
-    font-size: 28px;
-    font-weight: bold;
-    color: #00d9ff;
-    text-shadow: 0 0 15px rgba(0,217,255,0.7);
-}
-
-.gaming-label {
-    color: #c7d2fe;
-    font-weight: bold;
-}
-
-/* HERO */
-.hero {
-    padding: 100px 7% 80px;
-    text-align: center;
     background:
-        radial-gradient(circle at 50% 20%, rgba(0,217,255,0.25), transparent 35%),
-        linear-gradient(135deg,#111c52,#07152f);
-    animation: heroGlow 5s infinite alternate;
+        radial-gradient(circle at 20% 20%,rgba(0,217,255,.12),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(123,47,255,.12),transparent 30%);
 }
 
-.hero h1 {
-    font-size: clamp(38px,6vw,65px);
-    margin: 10px 0;
-    animation: fadeUp 0.8s ease;
+body::after{
+    content:"";
+    position:fixed;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(0,217,255,.08);
+    filter:blur(80px);
+    top:20%;
+    left:-100px;
+    animation:floatGlow 8s infinite alternate ease-in-out;
+    pointer-events:none;
+    z-index:-1;
 }
 
-.hero p {
-    color: #c7d2fe;
-    font-size: 18px;
-    animation: fadeUp 1s ease;
+@keyframes floatGlow{
+    from{transform:translate(0,0);}
+    to{transform:translate(110vw,40vh);}
 }
 
-@keyframes heroGlow {
-    from {
-        background-position: 0% 50%;
-    }
-    to {
-        background-position: 100% 50%;
-    }
-}
-
-@keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(25px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* SECTION */
-.section {
-    padding: 55px 7%;
-}
-
-.section h2 {
-    font-size: 30px;
-    margin-bottom: 25px;
-}
-
-/* SEARCH */
-.search {
-    width: 100%;
-    padding: 17px 20px;
-    border: 1px solid rgba(0,217,255,0.2);
-    border-radius: 14px;
-    background: #101936;
-    color: white;
-    font-size: 16px;
-    margin-bottom: 35px;
-    outline: none;
-    transition: 0.3s;
-}
-
-.search:focus {
-    border-color: #00d9ff;
-    box-shadow: 0 0 20px rgba(0,217,255,0.2);
-}
-
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
-    gap: 25px;
-}
-
-/* CARDS */
-.card {
-    background: linear-gradient(145deg,#101936,#0b1229);
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 10px 35px rgba(0,0,0,0.4);
-    transition: 0.35s ease;
-    animation: cardAppear 0.7s ease;
-}
-
-.card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: rgba(0,217,255,0.5);
+.sparkle{
+    position:fixed;
+    width:4px;
+    height:4px;
+    background:#fff;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-1;
     box-shadow:
-        0 15px 45px rgba(0,0,0,0.6),
-        0 0 25px rgba(0,217,255,0.12);
+        0 0 8px #fff,
+        0 0 16px #00d9ff;
+    animation:sparkleMove linear infinite;
 }
 
-@keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+@keyframes sparkleMove{
+    0%{
+        transform:translateY(100vh) scale(.3);
+        opacity:0;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.card img {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    display: block;
-    transition: 0.4s;
-}
-
-.card:hover img {
-    transform: scale(1.05);
-}
-
-.card-content {
-    padding: 20px;
-}
-
-.card h3 {
-    margin: 0 0 10px;
-    font-size: 20px;
-}
-
-.card p {
-    color: #aeb9d6;
-    min-height: 42px;
-    line-height: 1.5;
-}
-
-.price {
-    font-size: 21px;
-    font-weight: bold;
-    margin: 18px 0;
-    color: #00d9ff;
-}
-
-/* PURCHASE */
-.purchase {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: white;
-    color: #111;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.purchase:hover {
-    background: #00d9ff;
-    color: #001018;
-    transform: scale(1.03);
-    box-shadow: 0 0 20px rgba(0,217,255,0.4);
-}
-
-.purchase:active {
-    transform: scale(0.97);
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 45px;
-    color: #8994b5;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-/* MOBILE */
-@media(max-width:600px) {
-
-    header {
-        padding: 17px 5%;
-    }
-
-    .logo {
-        font-size: 24px;
-    }
-
-    .gaming-label {
-        font-size: 14px;
-    }
-
-    .section {
-        padding: 40px 5%;
-    }
-
-    .hero {
-        padding: 75px 5%;
+    15%{opacity:1;}
+    85%{opacity:1;}
+    100%{
+        transform:translateY(-10vh) scale(1);
+        opacity:0;
     }
 }
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:rgba(3,7,18,.78);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid rgba(0,217,255,.15);
+
+    box-shadow:0 5px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+    font-size:29px;
+    font-weight:bold;
+    letter-spacing:3px;
+    color:#00d9ff;
+
+    text-shadow:
+        0 0 10px #00d9ff,
+        0 0 25px rgba(0,217,255,.7);
+
+    animation:logoPulse 2s infinite alternate;
+}
+
+@keyframes logoPulse{
+    from{
+        text-shadow:0 0 8px #00d9ff;
+    }
+    to{
+        text-shadow:
+            0 0 10px #00d9ff,
+            0 0 35px #00d9ff;
+    }
+}
+
+.gaming-label{
+    padding:9px 16px;
+    border-radius:30px;
+
+    background:rgba(0,217,255,.08);
+    border:1px solid rgba(0,217,255,.3);
+
+    color:#bdefff;
+    font-weight:bold;
+
+    box-shadow:
+        inset 0 0 15px rgba(0,217,255,.05),
+        0 0 15px rgba(0,217,255,.08);
+}
+
+.hero{
+    position:relative;
+    padding:100px 7% 90px;
+    text-align:center;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,217,255,.18),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #101a4d,
+            #050b20
+        );
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+    border:1px solid rgba(0,217,255,.12);
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    animation:heroRing 8s linear infinite;
+}
+
+@keyframes heroRing{
+    from{
+        transform:translate(-50%,-50%) rotate(0deg) scale(1);
+    }
+    to{
+        transform:translate(-50%,-50%) rotate(360deg) scale(1.3);
+    }
+}
+
+.hero h1{
+    position:relative;
+    margin:0 0 15px;
+
+    font-size:clamp(38px,6vw,70px);
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #00d9ff,
+            #fff
+        );
+
+    background-size:200%;
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+    animation:titleShine 4s linear infinite;
+}
+
+@keyframes titleShine{
+    from{background-position:0%;}
+    to{background-position:200%;}
+}
+
+.hero p{
+    position:relative;
+    color:#c7d2fe;
+    font-size:18px;
+}
+
+.section{
+    padding:60px 7%;
+}
+
+.section h2{
+    font-size:30px;
+    margin-bottom:25px;
+}
+
+.search{
+    width:100%;
+    padding:18px 20px;
+    margin-bottom:35px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(0,217,255,.2);
+
+    background:rgba(16,25,54,.8);
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+    box-shadow:
+        inset 0 0 20px rgba(0,0,0,.2);
+}
+
+.search:focus{
+    border-color:#00d9ff;
+
+    box-shadow:
+        0 0 20px rgba(0,217,255,.2),
+        inset 0 0 20px rgba(0,217,255,.04);
+}
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(230px,1fr)
+        );
+
+    gap:26px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(20,32,67,.95),
+            rgba(7,13,32,.95)
+        );
+
+    border:1px solid rgba(255,255,255,.07);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.45);
+
+    transition:
+        transform .35s,
+        box-shadow .35s,
+        border-color .35s;
+
+    animation:cardAppear .7s ease both;
+}
+
+@keyframes cardAppear{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+    height:150px;
+
+    background:#00d9ff;
+    opacity:.06;
+
+    filter:blur(50px);
+
+    top:-70px;
+    right:-70px;
+
+    transition:.4s;
+}
+
+.card:hover{
+    transform:
+        translateY(-10px)
+        scale(1.015);
+
+    border-color:
+        rgba(0,217,255,.5);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.6),
+        0 0 30px rgba(0,217,255,.12);
+}
+
+.card:hover::before{
+    opacity:.18;
+    transform:scale(1.5);
+}
+
+.card-image{
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.card img{
+    width:100%;
+    height:190px;
+
+    object-fit:cover;
+    display:block;
+
+    transition:
+        transform .5s,
+        filter .5s;
+}
+
+.card:hover img{
+    transform:scale(1.08);
+
+    filter:
+        brightness(1.1)
+        saturate(1.15);
+}
+
+.image-overlay{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:rgba(0,0,0,.35);
+
+    opacity:0;
+
+    transition:.3s;
+
+    font-weight:bold;
+    letter-spacing:1px;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px #00d9ff;
+}
+
+.card:hover .image-overlay{
+    opacity:1;
+}
+
+.card-content{
+    padding:20px;
+}
+
+.card h3{
+    margin:0 0 10px;
+    font-size:20px;
+}
+
+.card p{
+    color:#aeb9d6;
+    min-height:42px;
+    line-height:1.5;
+}
+
+.price{
+    color:#00d9ff;
+
+    font-size:21px;
+    font-weight:bold;
+
+    margin:18px 0;
+
+    text-shadow:
+        0 0 12px rgba(0,217,255,.35);
+}
+
+.purchase{
+    width:100%;
+    padding:14px;
+
+    border:none;
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #dffaff
+        );
+
+    color:#07101c;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.purchase::before{
+    content:"";
+
+    position:absolute;
+
+    width:50px;
+    height:150px;
+
+    background:rgba(255,255,255,.7);
+
+    transform:
+        rotate(25deg)
+        translateX(-100px);
+
+    transition:.5s;
+}
+
+.purchase:hover::before{
+    transform:
+        rotate(25deg)
+        translateX(400px);
+}
+
+.purchase:hover{
+    transform:translateY(-2px);
+
+    background:#00d9ff;
+
+    box-shadow:
+        0 0 25px rgba(0,217,255,.35);
+}
+
+.details-page{
+    display:none;
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(0,217,255,.1),
+            transparent 35%
+        ),
+        #030712;
+}
+
+.details-page.active{
+    display:block;
+    animation:pageFade .5s ease;
+}
+
+@keyframes pageFade{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.details-hero{
+    position:relative;
+
+    padding:55px 7%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #111c52,
+            #050b20
+        );
+
+    border-bottom:1px solid rgba(0,217,255,.15);
+}
+
+.back-button{
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    border:1px solid #00d9ff;
+
+    background:
+        rgba(0,217,255,.08);
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.back-button:hover{
+    background:#00d9ff;
+    color:#07101c;
+
+    box-shadow:
+        0 0 20px rgba(0,217,255,.35);
+}
+
+.details-title{
+    font-size:
+        clamp(
+            35px,
+            5vw,
+            60px
+        );
+
+    margin:30px 0 10px;
+
+    color:white;
+
+    text-shadow:
+        0 0 20px rgba(0,217,255,.2);
+}
+
+.details-price{
+    color:#00d9ff;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.details-container{
+    max-width:1050px;
+    margin:auto;
+    padding:55px 7%;
+}
+
+.details-poster{
+    width:100%;
+    max-height:520px;
+
+    object-fit:cover;
+
+    border-radius:22px;
+
+    margin-bottom:40px;
+
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.6),
+        0 0 30px rgba(0,217,255,.08);
+}
+
+.info{
+    color:#c5cee5;
+    line-height:1.85;
+    font-size:17px;
+}
+
+.info p{
+    padding:18px 20px;
+    margin:0 0 15px;
+
+    border-left:
+        2px solid
+        rgba(0,217,255,.35);
+
+    background:
+        rgba(255,255,255,.025);
+
+    border-radius:0 10px 10px 0;
+
+    transition:.3s;
+}
+
+.info p:hover{
+    background:
+        rgba(0,217,255,.05);
+
+    border-left-color:#00d9ff;
+
+    transform:translateX(4px);
+}
+
+.video-title{
+    margin-top:55px;
+    margin-bottom:25px;
+
+    font-size:30px;
+
+    color:#fff;
+
+    text-shadow:
+        0 0 15px rgba(0,217,255,.2);
+}
+
+.video-container{
+    position:relative;
+
+    width:100%;
+
+    padding-bottom:56.25%;
+
+    height:0;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    border:1px solid rgba(0,217,255,.2);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.6);
+}
+
+.video-container iframe{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    border:0;
+}
+
+.details-purchase{
+    margin-top:30px;
+    max-width:400px;
+}
+
+footer{
+    text-align:center;
+
+    padding:45px;
+
+    color:#8994b5;
+
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:16px 5%;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .gaming-label{
+        font-size:12px;
+        padding:8px 11px;
+    }
+
+    .hero{
+        padding:75px 5%;
+    }
+
+    .section{
+        padding:45px 5%;
+    }
+
+    .details-container{
+        padding:40px 5%;
+    }
+
+    .details-hero{
+        padding:40px 5%;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
+
+<!-- SPARKLES -->
+
+<script>
+
+for(let i=0;i<45;i++){
+
+    const sparkle=document.createElement("div");
+
+    sparkle.className="sparkle";
+
+    sparkle.style.left=
+        Math.random()*100+"vw";
+
+    sparkle.style.animationDuration=
+        (4+Math.random()*8)+"s";
+
+    sparkle.style.animationDelay=
+        Math.random()*8+"s";
+
+    sparkle.style.opacity=
+        Math.random();
+
+    document.body.appendChild(sparkle);
+}
+
+</script>
+
+
+<!-- STORE PAGE -->
+
+<div id="storePage">
+
 <header>
 
-    <div class="logo">NEXORA</div>
+    <div class="logo">
+        NEXORA
+    </div>
 
-    <!-- ONLY GAMING — NO OTT OR SERVICES -->
-    <div class="gaming-label">🎮 Gaming Store</div>
+    <div class="gaming-label">
+        🎮 GAMING STORE
+    </div>
 
 </header>
 
 
-<!-- GAMING ONLY -->
-
-<section id="gaming">
-
-    <div class="hero">
-
-        <h1>LEVEL UP YOUR GAMING</h1>
-
-        <p>
-            Discover popular games and digital gaming products in one place.
-        </p>
-
-    </div>
-
-
-    <div class="section">
-
-        <h2>🔥 Popular Games</h2>
-
-        <input
-            type="text"
-            class="search"
-            placeholder="🔍 Search games..."
-            onkeyup="searchGames()"
-            id="gameSearch"
-        >
-
-
-        <div class="grid" id="gameGrid">
-
-
-            <!-- GTA V -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
-                    alt="Grand Theft Auto V"
-                >
-
-                <div class="card-content">
-
-                    <h3>Grand Theft Auto V</h3>
-
-                    <p>
-                        Open-world action adventure.
-                    </p>
-
-                    <div class="price">
-                        ₹999
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Grand Theft Auto V','₹999')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- RDR2 -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"
-                    alt="Red Dead Redemption 2"
-                >
-
-                <div class="card-content">
-
-                    <h3>Red Dead Redemption 2</h3>
-
-                    <p>
-                        Epic open-world western adventure.
-                    </p>
-
-                    <div class="price">
-                        ₹1,299
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Red Dead Redemption 2','₹1,299')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Cyberpunk -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"
-                    alt="Cyberpunk 2077"
-                >
-
-                <div class="card-content">
-
-                    <h3>Cyberpunk 2077</h3>
-
-                    <p>
-                        Open-world futuristic RPG.
-                    </p>
-
-                    <div class="price">
-                        ₹1,499
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Cyberpunk 2077','₹1,499')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Minecraft -->
-            <div class="card game-card">
-
-                <img
-                    src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/MC_About_Minecraft_Java-Bedrock_Overview.jpg"
-                    alt="Minecraft"
-                >
-
-                <div class="card-content">
-
-                    <h3>Minecraft</h3>
-
-                    <p>
-                        Build, explore and survive.
-                    </p>
-
-                    <div class="price">
-                        ₹999
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Minecraft','₹999')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Witcher 3 -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
-                    alt="The Witcher 3"
-                >
-
-                <div class="card-content">
-
-                    <h3>The Witcher 3</h3>
-
-                    <p>
-                        Fantasy open-world RPG.
-                    </p>
-
-                    <div class="price">
-                        ₹899
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('The Witcher 3','₹899')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Elden Ring -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
-                    alt="Elden Ring"
-                >
-
-                <div class="card-content">
-
-                    <h3>Elden Ring</h3>
-
-                    <p>
-                        Massive fantasy action RPG.
-                    </p>
-
-                    <div class="price">
-                        ₹2,499
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Elden Ring','₹2,499')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Hogwarts Legacy -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg"
-                    alt="Hogwarts Legacy"
-                >
-
-                <div class="card-content">
-
-                    <h3>Hogwarts Legacy</h3>
-
-                    <p>
-                        Explore the wizarding world.
-                    </p>
-
-                    <div class="price">
-                        ₹1,999
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Hogwarts Legacy','₹1,999')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Forza Horizon 5 -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg"
-                    alt="Forza Horizon 5"
-                >
-
-                <div class="card-content">
-
-                    <h3>Forza Horizon 5</h3>
-
-                    <p>
-                        Open-world racing experience.
-                    </p>
-
-                    <div class="price">
-                        ₹1,299
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Forza Horizon 5','₹1,299')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Spider-Man -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
-                    alt="Marvel Spider-Man Remastered"
-                >
-
-                <div class="card-content">
-
-                    <h3>Marvel's Spider-Man Remastered</h3>
-
-                    <p>
-                        Become Spider-Man and protect New York.
-                    </p>
-
-                    <div class="price">
-                        ₹2,499
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Marvel Spider-Man Remastered','₹2,499')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- God of War -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg"
-                    alt="God of War"
-                >
-
-                <div class="card-content">
-
-                    <h3>God of War</h3>
-
-                    <p>
-                        Action-packed Norse adventure.
-                    </p>
-
-                    <div class="price">
-                        ₹1,999
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('God of War','₹1,999')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Horizon -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg"
-                    alt="Horizon Zero Dawn"
-                >
-
-                <div class="card-content">
-
-                    <h3>Horizon Zero Dawn</h3>
-
-                    <p>
-                        Explore a world ruled by machines.
-                    </p>
-
-                    <div class="price">
-                        ₹999
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Horizon Zero Dawn','₹999')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Assassin's Creed -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
-                    alt="Assassin's Creed Odyssey"
-                >
-
-                <div class="card-content">
-
-                    <h3>Assassin's Creed Odyssey</h3>
-
-                    <p>
-                        Explore ancient Greece.
-                    </p>
-
-                    <div class="price">
-                        ₹899
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Assassins Creed Odyssey','₹899')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Far Cry -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/header.jpg"
-                    alt="Far Cry 6"
-                >
-
-                <div class="card-content">
-
-                    <h3>Far Cry 6</h3>
-
-                    <p>
-                        Open-world action adventure.
-                    </p>
-
-                    <div class="price">
-                        ₹1,499
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Far Cry 6','₹1,499')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Resident Evil -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg"
-                    alt="Resident Evil 4"
-                >
-
-                <div class="card-content">
-
-                    <h3>Resident Evil 4</h3>
-
-                    <p>
-                        Survival horror action.
-                    </p>
-
-                    <div class="price">
-                        ₹1,799
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Resident Evil 4','₹1,799')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Watch Dogs -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
-                    alt="Watch Dogs 2"
-                >
-
-                <div class="card-content">
-
-                    <h3>Watch Dogs 2</h3>
-
-                    <p>
-                        Hack your way through San Francisco.
-                    </p>
-
-                    <div class="price">
-                        ₹799
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Watch Dogs 2','₹799')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- NFS -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/header.jpg"
-                    alt="Need for Speed Heat"
-                >
-
-                <div class="card-content">
-
-                    <h3>Need for Speed Heat</h3>
-
-                    <p>
-                        Street racing and high-speed action.
-                    </p>
-
-                    <div class="price">
-                        ₹999
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Need for Speed Heat','₹999')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-
-            <!-- Dying Light -->
-            <div class="card game-card">
-
-                <img
-                    src="https://cdn.cloudflare.steamstatic.com/steam/apps/239140/header.jpg"
-                    alt="Dying Light"
-                >
-
-                <div class="card-content">
-
-                    <h3>Dying Light</h3>
-
-                    <p>
-                        Open-world zombie survival.
-                    </p>
-
-                    <div class="price">
-                        ₹699
-                    </div>
-
-                    <button
-                        class="purchase"
-                        onclick="purchase('Dying Light','₹699')"
-                    >
-                        PURCHASE NOW
-                    </button>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
+<section class="hero">
+
+    <h1>
+        LEVEL UP YOUR GAMING
+    </h1>
+
+    <p>
+        Discover popular games and digital gaming products.
+    </p>
 
 </section>
 
 
+<section class="section">
+
+<h2>
+    🔥 Popular Games
+</h2>
+
+
+<input
+    id="gameSearch"
+    class="search"
+    placeholder="🔍 Search games..."
+    onkeyup="searchGames()"
+>
+
+
+<div class="grid">
+
+
+<!-- GTA V -->
+
+<div
+class="card game-card"
+data-name="Grand Theft Auto V"
+>
+
+<div
+class="card-image"
+onclick="openGame('gta')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg"
+alt="Grand Theft Auto V"
+>
+
+<div class="image-overlay">
+    VIEW DETAILS ✨
+</div>
+
+</div>
+
+
+<div class="card-content">
+
+<h3>
+Grand Theft Auto V
+</h3>
+
+<p>
+Open-world action adventure.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Grand Theft Auto V','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RDR2 -->
+
+<div
+class="card game-card"
+data-name="Red Dead Redemption 2"
+>
+
+<div
+class="card-image"
+onclick="openGame('rdr2')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg"
+alt="Red Dead Redemption 2"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Red Dead Redemption 2
+</h3>
+
+<p>
+Epic open-world western adventure.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Red Dead Redemption 2','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- CYBERPUNK -->
+
+<div
+class="card game-card"
+data-name="Cyberpunk 2077"
+>
+
+<div
+class="card-image"
+onclick="openGame('cyberpunk')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg"
+alt="Cyberpunk 2077"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Cyberpunk 2077
+</h3>
+
+<p>
+Open-world futuristic RPG.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Cyberpunk 2077','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- WITCHER -->
+
+<div
+class="card game-card"
+data-name="The Witcher 3"
+>
+
+<div
+class="card-image"
+onclick="openGame('witcher')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/292030/header.jpg"
+alt="The Witcher 3"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+The Witcher 3
+</h3>
+
+<p>
+Fantasy open-world RPG.
+</p>
+
+<div class="price">
+₹499
+</div>
+
+<button
+class="purchase"
+onclick="purchase('The Witcher 3','₹499')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ELDEN RING -->
+
+<div
+class="card game-card"
+data-name="Elden Ring"
+>
+
+<div
+class="card-image"
+onclick="openGame('elden')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1245620/header.jpg"
+alt="Elden Ring"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Elden Ring
+</h3>
+
+<p>
+Massive fantasy action RPG.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Elden Ring','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- HOGWARTS -->
+
+<div
+class="card game-card"
+data-name="Hogwarts Legacy"
+>
+
+<div
+class="card-image"
+onclick="openGame('hogwarts')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/990080/header.jpg"
+alt="Hogwarts Legacy"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Hogwarts Legacy
+</h3>
+
+<p>
+Explore the wizarding world.
+</p>
+
+<div class="price">
+₹499
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Hogwarts Legacy','₹499')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FORZA -->
+
+<div
+class="card game-card"
+data-name="Forza Horizon 5"
+>
+
+<div
+class="card-image"
+onclick="openGame('forza')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1551360/header.jpg"
+alt="Forza Horizon 5"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Forza Horizon 5
+</h3>
+
+<p>
+Open-world racing experience.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Forza Horizon 5','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- SPIDER MAN -->
+
+<div
+class="card game-card"
+data-name="Marvel Spider-Man Remastered"
+>
+
+<div
+class="card-image"
+onclick="openGame('spiderman')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1817070/header.jpg"
+alt="Marvel Spider-Man Remastered"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Marvel's Spider-Man Remastered
+</h3>
+
+<p>
+Protect New York as Spider-Man.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Marvel Spider-Man Remastered','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- GOD OF WAR -->
+
+<div
+class="card game-card"
+data-name="God of War"
+>
+
+<div
+class="card-image"
+onclick="openGame('godofwar')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1593500/header.jpg"
+alt="God of War"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+God of War
+</h3>
+
+<p>
+Action-packed Norse adventure.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('God of War','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- HORIZON -->
+
+<div
+class="card game-card"
+data-name="Horizon Zero Dawn"
+>
+
+<div
+class="card-image"
+onclick="openGame('horizon')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1151640/header.jpg"
+alt="Horizon Zero Dawn"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Horizon Zero Dawn
+</h3>
+
+<p>
+Explore a world ruled by machines.
+</p>
+
+<div class="price">
+₹499
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Horizon Zero Dawn','₹499')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ASSASSINS CREED -->
+
+<div
+class="card game-card"
+data-name="Assassins Creed Odyssey"
+>
+
+<div
+class="card-image"
+onclick="openGame('assassins')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/812140/header.jpg"
+alt="Assassin's Creed Odyssey"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Assassin's Creed Odyssey
+</h3>
+
+<p>
+Explore ancient Greece.
+</p>
+
+<div class="price">
+₹499
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Assassins Creed Odyssey','₹499')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- FAR CRY -->
+
+<div
+class="card game-card"
+data-name="Far Cry 6"
+>
+
+<div
+class="card-image"
+onclick="openGame('farcry')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/2369390/header.jpg"
+alt="Far Cry 6"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Far Cry 6
+</h3>
+
+<p>
+Open-world action adventure.
+</p>
+
+<div class="price">
+₹499
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Far Cry 6','₹499')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RESIDENT EVIL -->
+
+<div
+class="card game-card"
+data-name="Resident Evil 4"
+>
+
+<div
+class="card-image"
+onclick="openGame('re4')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/2050650/header.jpg"
+alt="Resident Evil 4"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Resident Evil 4
+</h3>
+
+<p>
+Survival horror action.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Resident Evil 4','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- WATCH DOGS -->
+
+<div
+class="card game-card"
+data-name="Watch Dogs 2"
+>
+
+<div
+class="card-image"
+onclick="openGame('watchdogs')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/447040/header.jpg"
+alt="Watch Dogs 2"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Watch Dogs 2
+</h3>
+
+<p>
+Hack your way through San Francisco.
+</p>
+
+<div class="price">
+₹499
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Watch Dogs 2','₹499')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+<!-- NFS -->
+
+<div
+class="card game-card"
+data-name="Need for Speed Heat"
+>
+
+<div
+class="card-image"
+onclick="openGame('nfs')"
+>
+
+<img
+src="https://cdn.cloudflare.steamstatic.com/steam/apps/1222680/header.jpg"
+alt="Need for Speed Heat"
+>
+
+<div class="image-overlay">
+VIEW DETAILS ✨
+</div>
+
+</div>
+
+<div class="card-content">
+
+<h3>
+Need for Speed Heat
+</h3>
+
+<p>
+Street racing and high-speed action.
+</p>
+
+<div class="price">
+₹599
+</div>
+
+<button
+class="purchase"
+onclick="purchase('Need for Speed Heat','₹599')"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+</section>
+
+
 <footer>
-    © 2026 NEXORA Gaming Store
+© 2026 NEXORA Gaming Store
 </footer>
+
+</div>
+
+
+<!-- DETAILS PAGE -->
+
+<div
+id="detailsPage"
+class="details-page"
+>
+
+<div class="details-hero">
+
+<button
+class="back-button"
+onclick="closeGame()"
+>
+← BACK TO STORE
+</button>
+
+<h1
+id="detailsTitle"
+class="details-title"
+></h1>
+
+<div
+id="detailsPrice"
+class="details-price"
+></div>
+
+</div>
+
+
+<div class="details-container">
+
+<img
+id="detailsPoster"
+class="details-poster"
+>
+
+
+<div
+id="gameInformation"
+class="info"
+></div>
+
+
+<h2 class="video-title">
+▶ Game Trailer
+</h2>
+
+
+<div class="video-container">
+
+<iframe
+id="gameVideo"
+allow="autoplay; encrypted-media; picture-in-picture"
+allowfullscreen>
+</iframe>
+
+</div>
+
+
+<button
+id="detailsPurchase"
+class="purchase details-purchase"
+>
+PURCHASE NOW
+</button>
+
+</div>
+
+
+<footer>
+© 2026 NEXORA Gaming Store
+</footer>
+
+</div>
 
 
 <script>
 
-/* SEARCH */
 
-function searchGames() {
+/* GAME DATABASE */
 
-    let input = document
+const games={
+
+
+gta:{
+
+title:"Grand Theft Auto V",
+
+price:"₹599",
+
+image:
+"https://cdn.cloudflare.steamstatic.com/steam/apps/271590/header.jpg",
+
+video:
+"https://www.youtube.com/embed/QkkoHAzjnUs?autoplay=1&mute=1&rel=0",
+
+paragraphs:[
+
+"Grand Theft Auto V is an open-world action-adventure game developed by Rockstar North and published by Rockstar Games.",
+
+"The game is set in the fictional state of San Andreas, which is inspired by Southern California.",
+
+"The main story follows three central characters whose lives become connected through a series of criminal activities.",
+
+"Michael De Santa is a retired criminal living with his family in Los Santos.",
+
+"Franklin Clinton is a young man trying to escape street crime and build a better future.",
+
+"Trevor Philips is an unpredictable character with a history connected to Michael.",
+
+"Players can switch between the three protagonists during many parts of the single-player story.",
+
+"Los Santos is the game's enormous fictional city and contains urban areas, highways, countryside and mountains.",
+
+"Players can freely explore the world rather than following the main story at all times.",
+
+"The game includes a large selection of cars, motorcycles, aircraft, boats and other vehicles.",
+
+"Driving is an important part of exploration and many story missions involve vehicles.",
+
+"Players can participate in missions involving driving, shooting, exploration, flying and other activities.",
+
+"The game features a detailed wanted system in which police respond when the player commits crimes.",
+
+"GTA V also includes many optional activities such as sports, races, exploration and other activities.",
+
+"The single-player campaign contains a large number of missions and cinematic story sequences.",
+
+"Grand Theft Auto Online expands the game with a separate online multiplayer experience.",
+
+"In GTA Online, players can create a character and participate in missions and multiplayer activities.",
+
+"The game world contains shops, businesses, landmarks and numerous locations to discover.",
+
+"Character abilities and skills can develop as players progress through the game.",
+
+"The game combines driving, shooting, exploration, storytelling and open-world freedom.",
+
+"Grand Theft Auto V is available on multiple platforms and has received several technical updates.",
+
+"Because the game contains mature themes and violence, it is intended for mature audiences.",
+
+"Overall, GTA V is known for its large open world, multiple protagonists, extensive activities and cinematic storytelling."
+
+]
+
+},
+
+
+rdr2:{
+
+title:"Red Dead Redemption 2",
+
+price:"₹599",
+
+image:
+"https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/header.jpg",
+
+video:
+"https://www.youtube.com/embed/gmA6MrX81z4?autoplay=1&mute=1&rel=0",
+
+paragraphs:[
+
+"Red Dead Redemption 2 is an open-world action-adventure game developed by Rockstar Games.",
+
+"The game takes place in a fictionalized version of the American frontier during the late nineteenth century.",
+
+"The story follows Arthur Morgan, a member of the Van der Linde gang.",
+
+"Arthur travels with the gang as it attempts to survive while the frontier changes around them.",
+
+"The game focuses heavily on characters, relationships and the consequences of the gang's decisions.",
+
+"The world includes towns, forests, mountains, rivers, deserts and large wilderness areas.",
+
+"Players can travel through the world on horseback, on foot and using other forms of transportation.",
+
+"Horses are an important part of exploration and can be cared for and developed over time.",
+
+"The game includes hunting and fishing activities throughout its large environment.",
+
+"Players can discover wildlife ranging from small animals to large predators.",
+
+"The main story contains missions involving travel, combat, robberies and interactions with other characters.",
+
+"Arthur can interact with people throughout towns and wilderness areas.",
+
+"The game features a detailed weather system and changing environmental conditions.",
+
+"Day and night cycles affect the appearance and atmosphere of the world.",
+
+"Players can explore many optional locations and encounter random events.",
+
+"The game includes a morality system that can influence aspects of Arthur's journey.",
+
+"Red Dead Redemption 2 also features an online multiplayer component called Red Dead Online.",
+
+"The game's world is designed to encourage exploration away from the main story.",
+
+"The game places strong emphasis on cinematic presentation and character development.",
+
+"Players can customize equipment, clothing, weapons and other aspects of Arthur's journey.",
+
+"The game is known for its detailed environments and realistic world design.",
+
+"Red Dead Redemption 2 combines an expansive open world with a character-focused western story."
+
+]
+
+},
+
+
+cyberpunk:{
+
+title:"Cyberpunk 2077",
+
+price:"₹599",
+
+image:
+"https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/header.jpg",
+
+video:
+"https://www.youtube.com/embed/8X2kIfS6fb8?autoplay=1&mute=1&rel=0",
+
+paragraphs:[
+
+"Cyberpunk 2077 is an open-world action RPG developed by CD Projekt Red.",
+
+"The game is set in Night City, a futuristic metropolis located in a dystopian version of California.",
+
+"Players control a customizable character known as V.",
+
+"V becomes involved in a dangerous story involving corporations, technology and underground organizations.",
+
+"Night City is divided into multiple districts with different environments and communities.",
+
+"Players can explore streets, buildings, markets, highways and industrial areas.",
+
+"The game combines shooting, driving, exploration, dialogue and role-playing mechanics.",
+
+"Players can customize V's appearance and develop different abilities.",
+
+"Cyberware allows the player character to use various technological enhancements.",
+
+"The game includes a large collection of weapons with different characteristics.",
+
+"Vehicles are used to travel around the enormous city.",
+
+"Players can approach some situations using different combat or stealth options.",
+
+"Dialogue choices can affect conversations and aspects of the story.",
+
+"The game contains numerous side missions alongside the main storyline.",
+
+"Side characters have their own stories and missions.",
+
+"Night City includes many shops and locations that players can visit.",
+
+"The game features a day and night cycle that changes the appearance of the city.",
+
+"Players can improve their character through different skills and equipment.",
+
+"The world contains futuristic technology, advertisements and fictional corporations.",
+
+"Cyberpunk 2077 focuses strongly on storytelling and character relationships.",
+
+"The game has received major updates and expansions since its original release.",
+
+"Cyberpunk 2077 combines role-playing systems with a large futuristic open world."
+
+]
+
+}
+
+};
+
+
+const defaultInfo=[
+
+"This game is a popular video game available on modern gaming platforms.",
+
+"It offers players a complete gaming experience with its own world, characters and gameplay systems.",
+
+"The game is designed around exploration, progression and interactive gameplay.",
+
+"Players can learn the game's mechanics as they progress through different challenges.",
+
+"The world contains different locations and environments to explore.",
+
+"Depending on the game, players may travel using vehicles, characters or other methods.",
+
+"The game includes missions, objectives or activities that give players reasons to explore.",
+
+"Players can discover different characters and interact with elements of the game world.",
+
+"The gameplay can include action, exploration, strategy, racing, role-playing or adventure elements.",
+
+"Different equipment, abilities or items can be available to the player.",
+
+"Players can progress through the game by completing objectives and activities.",
+
+"Many games contain optional content in addition to their main progression.",
+
+"Many areas of the game world can be explored outside the main objectives.",
+
+"The visual design is created to match the game's setting and atmosphere.",
+
+"Sound effects and music are used to create the overall gaming experience.",
+
+"The game may offer different difficulty levels or gameplay approaches.",
+
+"Players can develop their skills by learning the mechanics of the game.",
+
+"Some games also provide additional multiplayer or online features.",
+
+"The game is designed to provide entertainment through interactive gameplay.",
+
+"Updates or additional content may be released depending on the game.",
+
+"The game is available on selected platforms depending on its official release.",
+
+"Players should check the official platform requirements before purchasing.",
+
+"Overall, the game provides its own combination of story, gameplay and exploration."
+
+];
+
+
+function openGame(id){
+
+    let game=games[id];
+
+    if(!game){
+
+        const card=document.querySelector(
+            '[data-name="'+id+'"]'
+        );
+
+        let title=card
+            ?card.getAttribute("data-name")
+            :id;
+
+        game={
+
+            title:title,
+
+            price:"₹499",
+
+            image:card
+                ?card.querySelector("img").src
+                :"",
+
+            video:
+            "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&rel=0",
+
+            paragraphs:defaultInfo
+        };
+    }
+
+
+    document
+        .getElementById("storePage")
+        .style.display="none";
+
+
+    document
+        .getElementById("detailsPage")
+        .classList.add("active");
+
+
+    document
+        .getElementById("detailsTitle")
+        .innerText=game.title;
+
+
+    document
+        .getElementById("detailsPrice")
+        .innerText=game.price;
+
+
+    document
+        .getElementById("detailsPoster")
+        .src=game.image;
+
+
+    let information="";
+
+
+    game.paragraphs.forEach(function(paragraph,index){
+
+        information+=
+        "<p><strong>"+(index+1)+".</strong> "+
+        paragraph+
+        "</p>";
+
+    });
+
+
+    document
+        .getElementById("gameInformation")
+        .innerHTML=information;
+
+
+    document
+        .getElementById("gameVideo")
+        .src=game.video;
+
+
+    document
+        .getElementById("detailsPurchase")
+        .onclick=function(){
+
+            purchase(
+                game.title,
+                game.price
+            );
+
+        };
+
+
+    window.scrollTo(0,0);
+
+}
+
+
+function closeGame(){
+
+    document
+        .getElementById("gameVideo")
+        .src="";
+
+
+    document
+        .getElementById("detailsPage")
+        .classList.remove("active");
+
+
+    document
+        .getElementById("storePage")
+        .style.display="block";
+
+
+    window.scrollTo(0,0);
+
+}
+
+
+function searchGames(){
+
+    const input=
+        document
         .getElementById("gameSearch")
         .value
         .toLowerCase();
 
-    let games = document.querySelectorAll(".game-card");
 
-    games.forEach(game => {
+    document
+    .querySelectorAll(".game-card")
+    .forEach(function(card){
 
-        let name = game
-            .querySelector("h3")
-            .innerText
+        const name=
+            card
+            .getAttribute("data-name")
             .toLowerCase();
 
-        game.style.display =
-            name.includes(input) ? "block" : "none";
+
+        card.style.display=
+            name.includes(input)
+            ?"block"
+            :"none";
 
     });
+
 }
 
 
-/* WHATSAPP PURCHASE */
+function purchase(product,price){
 
-function purchase(product, price) {
+    const reminder=
 
-    let message =
-        "Hello, I want to Purchase " +
-        product +
-        ". Price: " +
-        price;
+`Some things to remember:
 
-    let whatsappNumber = "918291697606";
+If I don't message or if I don't reply to you for 23 hours, then don't worry.
 
-    let whatsappURL =
-        "https://wa.me/" +
-        whatsappNumber +
-        "?text=" +
-        encodeURIComponent(message);
+I may be stuck in some work, and your order will be received by you in 1 day.
 
-    window.open(whatsappURL, "_blank");
+If I am not replying, then you can try on this number too: 8879406551.
+
+I hope you understand.
+
+Thanks for purchasing.`;
+
+
+    const proceed=
+        confirm(
+            reminder+
+            "\n\nClick OK to continue to WhatsApp."
+        );
+
+
+    if(proceed){
+
+        const message=
+            "Hello, I want to Purchase "+
+            product+
+            ". Price: "+
+            price;
+
+
+        const number=
+            "918291697606";
+
+
+        const url=
+            "https://wa.me/"+
+            number+
+            "?text="+
+            encodeURIComponent(message);
+
+
+        window.open(
+            url,
+            "_blank"
+        );
+
+    }
 
 }
 
