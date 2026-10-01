@@ -3,190 +3,346 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXORA Digital Store</title>
+
+<title>NEXORA — Digital Store</title>
 
 <style>
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background: #070b14;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #070711;
     color: white;
     min-height: 100vh;
-    transition: 0.5s;
+    transition: background 0.5s ease;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 header {
-    padding: 20px 7%;
+    width: 100%;
+    padding: 22px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(5,5,15,0.85);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .logo {
     font-size: 25px;
-    font-weight: bold;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #48d9ff;
 }
 
 nav {
     display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 8px;
 }
 
-nav button {
+.nav-btn {
     border: none;
     padding: 11px 18px;
     border-radius: 25px;
-    background: rgba(255,255,255,0.08);
     color: white;
+    background: rgba(255,255,255,0.07);
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s;
 }
 
-nav button:hover,
-nav button.active {
+.nav-btn:hover {
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
     background: white;
-    color: black;
+    color: #111;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    width: 86%;
+    max-width: 1250px;
+    margin: auto;
 }
 
 .hero {
-    padding: 80px 7% 50px;
     text-align: center;
+    padding: 90px 10px 55px;
+    animation: fadeIn 0.5s ease;
 }
 
 .hero h1 {
-    font-size: clamp(40px, 7vw, 75px);
-    margin-bottom: 15px;
+    font-size: clamp(40px, 7vw, 78px);
+    line-height: 1;
+    font-weight: 900;
+    margin-bottom: 20px;
 }
 
 .hero p {
-    color: #b8c0d4;
+    color: #b9b9c8;
     font-size: 18px;
+    max-width: 650px;
+    margin: auto;
 }
 
+/* =========================
+   SEARCH
+========================= */
+
+.search-area {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 35px;
+}
+
+.search {
+    width: 100%;
+    max-width: 600px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.12);
+    outline: none;
+    background: rgba(255,255,255,0.06);
+    color: white;
+    font-size: 16px;
+}
+
+.search::placeholder {
+    color: #888;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
 .products {
-    padding: 20px 7% 70px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 22px;
+    padding-bottom: 80px;
 }
 
 .card {
-    padding: 25px;
-    border-radius: 22px;
-    background: rgba(255,255,255,0.07);
     border: 1px solid rgba(255,255,255,0.1);
-    transition: 0.3s;
+    border-radius: 22px;
+    padding: 28px;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+    transition: 0.35s;
+    position: relative;
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-7px);
-    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-8px);
+    border-color: rgba(255,255,255,0.3);
 }
 
 .icon {
-    font-size: 45px;
-    margin-bottom: 18px;
+    font-size: 42px;
+    margin-bottom: 20px;
 }
 
-.card h2 {
+.card h3 {
+    font-size: 22px;
     margin-bottom: 10px;
 }
 
 .card p {
-    color: #aeb6ca;
-    min-height: 50px;
+    color: #aaaaba;
+    min-height: 45px;
     line-height: 1.5;
 }
 
 .price {
     font-size: 24px;
-    font-weight: bold;
-    margin: 20px 0;
+    font-weight: 900;
+    margin: 22px 0;
 }
 
 .buy {
     width: 100%;
-    padding: 13px;
     border: none;
+    padding: 14px;
     border-radius: 12px;
     background: white;
-    color: black;
+    color: #111;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    transition: 0.25s;
 }
+
+.buy:hover {
+    transform: scale(1.03);
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     text-align: center;
-    padding: 25px;
-    color: #8992a8;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 35px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    color: #777;
 }
 
-/* GAMING THEME */
+/* =========================
+   THEMES
+========================= */
+
 body.gaming {
     background:
-        radial-gradient(circle at 20% 20%, #35106b, transparent 35%),
-        radial-gradient(circle at 80% 30%, #003d66, transparent 35%),
-        #050713;
+        radial-gradient(circle at 20% 20%, #21106b 0%, transparent 35%),
+        radial-gradient(circle at 80% 20%, #006dff 0%, transparent 30%),
+        #05050c;
 }
 
 body.gaming .logo {
-    color: #6ee7ff;
+    color: #4de1ff;
 }
 
 body.gaming .hero h1 {
-    text-shadow: 0 0 30px #00d9ff;
+    background: linear-gradient(90deg,#55eaff,#7467ff);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-/* OTT THEME */
+body.gaming .card {
+    background: linear-gradient(
+        145deg,
+        rgba(78,57,190,.25),
+        rgba(12,30,70,.35)
+    );
+}
+
+
+/* OTT */
+
 body.ott {
     background:
-        radial-gradient(circle at 20% 20%, #620018, transparent 35%),
-        radial-gradient(circle at 80% 30%, #26004d, transparent 35%),
-        #10030a;
+        radial-gradient(circle at 20% 20%, #6d0715 0%, transparent 35%),
+        radial-gradient(circle at 80% 20%, #e50914 0%, transparent 30%),
+        #080506;
 }
 
 body.ott .logo {
-    color: #ff4b6e;
+    color: #ff3b47;
 }
 
 body.ott .hero h1 {
-    text-shadow: 0 0 30px #ff174d;
+    background: linear-gradient(90deg,#ff3340,#ff8a00);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-/* SERVICES THEME */
+body.ott .card {
+    background: linear-gradient(
+        145deg,
+        rgba(130,10,20,.35),
+        rgba(45,10,15,.4)
+    );
+}
+
+
+/* SERVICES */
+
 body.services {
     background:
-        radial-gradient(circle at 20% 20%, #064e3b, transparent 35%),
-        radial-gradient(circle at 80% 30%, #164e63, transparent 35%),
-        #03120f;
+        radial-gradient(circle at 20% 20%, #075e4f 0%, transparent 35%),
+        radial-gradient(circle at 80% 20%, #008b72 0%, transparent 30%),
+        #030909;
 }
 
 body.services .logo {
-    color: #34d399;
+    color: #3cffc5;
 }
 
 body.services .hero h1 {
-    text-shadow: 0 0 30px #10b981;
+    background: linear-gradient(90deg,#36ffd0,#48a7ff);
+    -webkit-background-clip: text;
+    color: transparent;
 }
 
-@media(max-width:700px) {
+body.services .card {
+    background: linear-gradient(
+        145deg,
+        rgba(0,130,110,.25),
+        rgba(5,40,40,.4)
+    );
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade {
+    animation: fadeIn 0.45s ease;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 800px) {
+
     header {
+        padding: 18px 4%;
         flex-direction: column;
-        gap: 18px;
+        gap: 15px;
     }
 
     nav {
+        width: 100%;
         justify-content: center;
+    }
+
+    .nav-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    main {
+        width: 92%;
+    }
+
+    .hero {
+        padding-top: 60px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
     }
 }
 </style>
@@ -195,163 +351,361 @@ body.services .hero h1 {
 <body class="gaming">
 
 <header>
+
     <div class="logo">NEXORA</div>
 
     <nav>
-        <button class="active" onclick="changeTab('gaming', this)">🎮 Gaming</button>
-        <button onclick="changeTab('ott', this)">📺 OTT</button>
-        <button onclick="changeTab('services', this)">💻 Services</button>
+        <button class="nav-btn active" onclick="changeTab('gaming')">
+            🎮 Gaming
+        </button>
+
+        <button class="nav-btn" onclick="changeTab('ott')">
+            📺 OTT
+        </button>
+
+        <button class="nav-btn" onclick="changeTab('services')">
+            🛠️ Services
+        </button>
     </nav>
+
 </header>
 
+
+<main>
+
 <section class="hero">
-    <h1 id="title">LEVEL UP YOUR GAMING</h1>
-    <p id="subtitle">Digital gaming products and services in one place.</p>
-</section>
 
-<section class="products" id="products">
+    <h1 id="heroTitle">
+        LEVEL UP YOUR GAMING
+    </h1>
 
-    <div class="card">
-        <div class="icon">🎮</div>
-        <h2>Game Store</h2>
-        <p>Digital game products and legitimate game-related purchases.</p>
-        <div class="price">From ₹99</div>
-        <button class="buy">View Products</button>
-    </div>
-
-    <div class="card">
-        <div class="icon">🕹️</div>
-        <h2>Gaming Services</h2>
-        <p>Gaming-related digital services and support.</p>
-        <div class="price">From ₹49</div>
-        <button class="buy">Explore</button>
-    </div>
-
-    <div class="card">
-        <div class="icon">🎁</div>
-        <h2>Gift Cards</h2>
-        <p>Authorized digital gift cards and gaming credits.</p>
-        <div class="price">From ₹100</div>
-        <button class="buy">View Cards</button>
-    </div>
+    <p id="heroText">
+        Digital gaming products and legitimate game-related services in one place.
+    </p>
 
 </section>
+
+
+<div class="search-area">
+
+    <input
+        type="text"
+        id="search"
+        class="search"
+        placeholder="Search products..."
+        onkeyup="searchProducts()"
+    >
+
+</div>
+
+
+<section class="products" id="products"></section>
+
+</main>
+
 
 <footer>
-    © 2026 NEXORA Digital Store • All rights reserved
+    © 2026 NEXORA — Digital Store
 </footer>
 
+
 <script>
-function changeTab(type, button) {
 
-    document.body.className = type;
+const data = {
 
-    document.querySelectorAll("nav button").forEach(btn => {
+    gaming: {
+
+        title: "LEVEL UP YOUR GAMING",
+
+        description:
+        "Digital gaming products and legitimate game-related services in one place.",
+
+        products: [
+
+            {
+                icon: "🎮",
+                name: "Game Store",
+                description: "Digital games and legitimate game-related purchases.",
+                price: "₹99"
+            },
+
+            {
+                icon: "🕹️",
+                name: "Gaming Services",
+                description: "Gaming-related digital services and support.",
+                price: "₹49"
+            },
+
+            {
+                icon: "🎁",
+                name: "Gaming Gift Cards",
+                description: "Authorized digital gift cards and gaming credits.",
+                price: "₹100"
+            },
+
+            {
+                icon: "💎",
+                name: "Game Credits",
+                description: "Purchase credits for supported games.",
+                price: "₹99"
+            },
+
+            {
+                icon: "🏆",
+                name: "Tournament Entry",
+                description: "Digital tournament and gaming event access.",
+                price: "₹49"
+            },
+
+            {
+                icon: "🎨",
+                name: "Gaming Graphics",
+                description: "Custom gaming banners, thumbnails and artwork.",
+                price: "₹149"
+            }
+
+        ]
+
+    },
+
+
+    ott: {
+
+        title: "YOUR ENTERTAINMENT HUB",
+
+        description:
+        "Browse authorized streaming subscriptions and digital entertainment services.",
+
+        products: [
+
+            {
+                icon: "📺",
+                name: "Streaming Subscription",
+                description: "Authorized streaming subscription plans.",
+                price: "₹149"
+            },
+
+            {
+                icon: "🎬",
+                name: "Movie & Series Pack",
+                description: "Digital entertainment packages from authorized providers.",
+                price: "₹199"
+            },
+
+            {
+                icon: "🍿",
+                name: "Entertainment Pack",
+                description: "Choose from available entertainment services.",
+                price: "₹249"
+            },
+
+            {
+                icon: "🎥",
+                name: "Premium Entertainment",
+                description: "Premium authorized streaming options.",
+                price: "₹299"
+            },
+
+            {
+                icon: "👨‍👩‍👧‍👦",
+                name: "Family Plan",
+                description: "Eligible family subscription options.",
+                price: "₹399"
+            },
+
+            {
+                icon: "⭐",
+                name: "Entertainment Support",
+                description: "Help choosing and setting up supported services.",
+                price: "₹49"
+            }
+
+        ]
+
+    },
+
+
+    services: {
+
+        title: "DIGITAL SERVICES",
+
+        description:
+        "Creative and digital services to help your online presence grow.",
+
+        products: [
+
+            {
+                icon: "🎨",
+                name: "Social Media Design",
+                description: "Professional posts, banners and social graphics.",
+                price: "₹99"
+            },
+
+            {
+                icon: "🖼️",
+                name: "Thumbnail Design",
+                description: "Custom thumbnails for YouTube and social platforms.",
+                price: "₹79"
+            },
+
+            {
+                icon: "🎬",
+                name: "Video Editing",
+                description: "Short-form video editing for social media.",
+                price: "₹199"
+            },
+
+            {
+                icon: "✍️",
+                name: "Caption & Copy",
+                description: "Captions and promotional copy for your content.",
+                price: "₹49"
+            },
+
+            {
+                icon: "🚀",
+                name: "Social Media Promotion",
+                description: "Legitimate promotional strategies for your content.",
+                price: "₹149"
+            },
+
+            {
+                icon: "💻",
+                name: "Website Design",
+                description: "Simple websites and landing pages for businesses.",
+                price: "₹499"
+            }
+
+        ]
+
+    }
+
+};
+
+
+let currentTab = "gaming";
+
+
+function changeTab(tab) {
+
+    currentTab = tab;
+
+    const body = document.body;
+
+    body.classList.remove("gaming");
+    body.classList.remove("ott");
+    body.classList.remove("services");
+
+    body.classList.add(tab);
+
+    document.querySelectorAll(".nav-btn").forEach(btn => {
         btn.classList.remove("active");
     });
 
-    button.classList.add("active");
-
-    const title = document.getElementById("title");
-    const subtitle = document.getElementById("subtitle");
-    const products = document.getElementById("products");
-
-    if (type === "gaming") {
-
-        title.innerHTML = "LEVEL UP YOUR GAMING";
-        subtitle.innerHTML =
-        "Digital gaming products and services in one place.";
-
-        products.innerHTML = `
-        <div class="card">
-            <div class="icon">🎮</div>
-            <h2>Game Store</h2>
-            <p>Digital game products and legitimate game-related purchases.</p>
-            <div class="price">From ₹99</div>
-            <button class="buy">View Products</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">🕹️</div>
-            <h2>Gaming Services</h2>
-            <p>Gaming-related digital services and support.</p>
-            <div class="price">From ₹49</div>
-            <button class="buy">Explore</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">🎁</div>
-            <h2>Gift Cards</h2>
-            <p>Authorized digital gift cards and gaming credits.</p>
-            <div class="price">From ₹100</div>
-            <button class="buy">View Cards</button>
-        </div>`;
+    if(tab === "gaming") {
+        document.querySelectorAll(".nav-btn")[0].classList.add("active");
     }
 
-    if (type === "ott") {
-
-        title.innerHTML = "YOUR ENTERTAINMENT HUB";
-        subtitle.innerHTML =
-        "Authorized streaming plans and digital entertainment products.";
-
-        products.innerHTML = `
-        <div class="card">
-            <div class="icon">🍿</div>
-            <h2>Streaming Plans</h2>
-            <p>Information and links for officially available streaming plans.</p>
-            <div class="price">View Plans</div>
-            <button class="buy">Explore</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">🎬</div>
-            <h2>Entertainment</h2>
-            <p>Discover movies, series and digital entertainment.</p>
-            <div class="price">Explore</div>
-            <button class="buy">View More</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">📺</div>
-            <h2>Gift Cards</h2>
-            <p>Officially issued entertainment gift cards where available.</p>
-            <div class="price">View Cards</div>
-            <button class="buy">Explore</button>
-        </div>`;
+    if(tab === "ott") {
+        document.querySelectorAll(".nav-btn")[1].classList.add("active");
     }
 
-    if (type === "services") {
-
-        title.innerHTML = "DIGITAL SERVICES";
-        subtitle.innerHTML =
-        "Creative and legitimate digital services for creators and businesses.";
-
-        products.innerHTML = `
-        <div class="card">
-            <div class="icon">🎨</div>
-            <h2>Thumbnail Design</h2>
-            <p>Custom thumbnails for YouTube, gaming and social media.</p>
-            <div class="price">From ₹99</div>
-            <button class="buy">Order</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">🎬</div>
-            <h2>Video Editing</h2>
-            <p>Short-form videos, reels and gaming edits.</p>
-            <div class="price">From ₹199</div>
-            <button class="buy">Order</button>
-        </div>
-
-        <div class="card">
-            <div class="icon">📱</div>
-            <h2>Social Media Management</h2>
-            <p>Legitimate content and account-management services.</p>
-            <div class="price">Contact Us</div>
-            <button class="buy">Contact</button>
-        </div>`;
+    if(tab === "services") {
+        document.querySelectorAll(".nav-btn")[2].classList.add("active");
     }
+
+    document.getElementById("heroTitle").textContent =
+        data[tab].title;
+
+    document.getElementById("heroText").textContent =
+        data[tab].description;
+
+    document.getElementById("search").value = "";
+
+    renderProducts(data[tab].products);
 }
+
+
+function renderProducts(products) {
+
+    const container = document.getElementById("products");
+
+    container.innerHTML = "";
+
+    products.forEach(product => {
+
+        const card = document.createElement("div");
+
+        card.className = "card fade";
+
+        card.innerHTML = `
+
+            <div class="icon">
+                ${product.icon}
+            </div>
+
+            <h3>
+                ${product.name}
+            </h3>
+
+            <p>
+                ${product.description}
+            </p>
+
+            <div class="price">
+                From ${product.price}
+            </div>
+
+            <button
+                class="buy"
+                onclick="buyProduct('${product.name}')"
+            >
+                Buy Now
+            </button>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+
+function searchProducts() {
+
+    const query =
+        document.getElementById("search").value.toLowerCase();
+
+    const products =
+        data[currentTab].products.filter(product =>
+
+            product.name.toLowerCase().includes(query) ||
+
+            product.description.toLowerCase().includes(query)
+
+        );
+
+    renderProducts(products);
+
+}
+
+
+function buyProduct(name) {
+
+    alert(
+        "You selected: " +
+        name +
+        "\n\nThe secure checkout system will be added next."
+    );
+
+}
+
+
+/* Load Gaming page initially */
+
+renderProducts(data.gaming.products);
+
 </script>
 
 </body>
