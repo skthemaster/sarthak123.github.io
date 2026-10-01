@@ -1,15 +1,358 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Digital Store</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXORA Digital Store</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #070b14;
+    color: white;
+    min-height: 100vh;
+    transition: 0.5s;
+}
+
+header {
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+nav button {
+    border: none;
+    padding: 11px 18px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.08);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav button:hover,
+nav button.active {
+    background: white;
+    color: black;
+}
+
+.hero {
+    padding: 80px 7% 50px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(40px, 7vw, 75px);
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #b8c0d4;
+    font-size: 18px;
+}
+
+.products {
+    padding: 20px 7% 70px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.card {
+    padding: 25px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.icon {
+    font-size: 45px;
+    margin-bottom: 18px;
+}
+
+.card h2 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #aeb6ca;
+    min-height: 50px;
+    line-height: 1.5;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.buy {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #8992a8;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* GAMING THEME */
+body.gaming {
+    background:
+        radial-gradient(circle at 20% 20%, #35106b, transparent 35%),
+        radial-gradient(circle at 80% 30%, #003d66, transparent 35%),
+        #050713;
+}
+
+body.gaming .logo {
+    color: #6ee7ff;
+}
+
+body.gaming .hero h1 {
+    text-shadow: 0 0 30px #00d9ff;
+}
+
+/* OTT THEME */
+body.ott {
+    background:
+        radial-gradient(circle at 20% 20%, #620018, transparent 35%),
+        radial-gradient(circle at 80% 30%, #26004d, transparent 35%),
+        #10030a;
+}
+
+body.ott .logo {
+    color: #ff4b6e;
+}
+
+body.ott .hero h1 {
+    text-shadow: 0 0 30px #ff174d;
+}
+
+/* SERVICES THEME */
+body.services {
+    background:
+        radial-gradient(circle at 20% 20%, #064e3b, transparent 35%),
+        radial-gradient(circle at 80% 30%, #164e63, transparent 35%),
+        #03120f;
+}
+
+body.services .logo {
+    color: #34d399;
+}
+
+body.services .hero h1 {
+    text-shadow: 0 0 30px #10b981;
+}
+
+@media(max-width:700px) {
+    header {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav {
+        justify-content: center;
+    }
+}
+</style>
 </head>
-<body>
 
-    <h1>My Digital Store</h1>
-    <p>Gaming • OTT • Digital Services</p>
+<body class="gaming">
 
-    <h2>Welcome!</h2>
-    <p>Our website is coming soon.</p>
+<header>
+    <div class="logo">NEXORA</div>
+
+    <nav>
+        <button class="active" onclick="changeTab('gaming', this)">🎮 Gaming</button>
+        <button onclick="changeTab('ott', this)">📺 OTT</button>
+        <button onclick="changeTab('services', this)">💻 Services</button>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1 id="title">LEVEL UP YOUR GAMING</h1>
+    <p id="subtitle">Digital gaming products and services in one place.</p>
+</section>
+
+<section class="products" id="products">
+
+    <div class="card">
+        <div class="icon">🎮</div>
+        <h2>Game Store</h2>
+        <p>Digital game products and legitimate game-related purchases.</p>
+        <div class="price">From ₹99</div>
+        <button class="buy">View Products</button>
+    </div>
+
+    <div class="card">
+        <div class="icon">🕹️</div>
+        <h2>Gaming Services</h2>
+        <p>Gaming-related digital services and support.</p>
+        <div class="price">From ₹49</div>
+        <button class="buy">Explore</button>
+    </div>
+
+    <div class="card">
+        <div class="icon">🎁</div>
+        <h2>Gift Cards</h2>
+        <p>Authorized digital gift cards and gaming credits.</p>
+        <div class="price">From ₹100</div>
+        <button class="buy">View Cards</button>
+    </div>
+
+</section>
+
+<footer>
+    © 2026 NEXORA Digital Store • All rights reserved
+</footer>
+
+<script>
+function changeTab(type, button) {
+
+    document.body.className = type;
+
+    document.querySelectorAll("nav button").forEach(btn => {
+        btn.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    const title = document.getElementById("title");
+    const subtitle = document.getElementById("subtitle");
+    const products = document.getElementById("products");
+
+    if (type === "gaming") {
+
+        title.innerHTML = "LEVEL UP YOUR GAMING";
+        subtitle.innerHTML =
+        "Digital gaming products and services in one place.";
+
+        products.innerHTML = `
+        <div class="card">
+            <div class="icon">🎮</div>
+            <h2>Game Store</h2>
+            <p>Digital game products and legitimate game-related purchases.</p>
+            <div class="price">From ₹99</div>
+            <button class="buy">View Products</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🕹️</div>
+            <h2>Gaming Services</h2>
+            <p>Gaming-related digital services and support.</p>
+            <div class="price">From ₹49</div>
+            <button class="buy">Explore</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎁</div>
+            <h2>Gift Cards</h2>
+            <p>Authorized digital gift cards and gaming credits.</p>
+            <div class="price">From ₹100</div>
+            <button class="buy">View Cards</button>
+        </div>`;
+    }
+
+    if (type === "ott") {
+
+        title.innerHTML = "YOUR ENTERTAINMENT HUB";
+        subtitle.innerHTML =
+        "Authorized streaming plans and digital entertainment products.";
+
+        products.innerHTML = `
+        <div class="card">
+            <div class="icon">🍿</div>
+            <h2>Streaming Plans</h2>
+            <p>Information and links for officially available streaming plans.</p>
+            <div class="price">View Plans</div>
+            <button class="buy">Explore</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎬</div>
+            <h2>Entertainment</h2>
+            <p>Discover movies, series and digital entertainment.</p>
+            <div class="price">Explore</div>
+            <button class="buy">View More</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📺</div>
+            <h2>Gift Cards</h2>
+            <p>Officially issued entertainment gift cards where available.</p>
+            <div class="price">View Cards</div>
+            <button class="buy">Explore</button>
+        </div>`;
+    }
+
+    if (type === "services") {
+
+        title.innerHTML = "DIGITAL SERVICES";
+        subtitle.innerHTML =
+        "Creative and legitimate digital services for creators and businesses.";
+
+        products.innerHTML = `
+        <div class="card">
+            <div class="icon">🎨</div>
+            <h2>Thumbnail Design</h2>
+            <p>Custom thumbnails for YouTube, gaming and social media.</p>
+            <div class="price">From ₹99</div>
+            <button class="buy">Order</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎬</div>
+            <h2>Video Editing</h2>
+            <p>Short-form videos, reels and gaming edits.</p>
+            <div class="price">From ₹199</div>
+            <button class="buy">Order</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">📱</div>
+            <h2>Social Media Management</h2>
+            <p>Legitimate content and account-management services.</p>
+            <div class="price">Contact Us</div>
+            <button class="buy">Contact</button>
+        </div>`;
+    }
+}
+</script>
 
 </body>
 </html>
