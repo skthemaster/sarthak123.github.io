@@ -164,6 +164,35 @@
   .chat-f input:focus{border-color:#5668ff}
   .chat-f button{border:0;background:var(--grad);color:#fff;width:46px;border-radius:50%;cursor:pointer;font-size:1.1rem}
 
+
+  /* login gate */
+  .gate{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;align-items:center;justify-content:center;padding:24px;overflow:auto}
+  .gate.show{display:flex}
+  .gate::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:900px;max-width:140vw;height:560px;background:radial-gradient(ellipse at 50% 0%,rgba(40,60,160,.5),rgba(8,8,11,0) 70%);pointer-events:none}
+  .gate-in{position:relative;width:100%;max-width:420px;text-align:center}
+  .gate .logo{justify-content:center;margin-bottom:34px}
+  .gate h2{font-size:clamp(2rem,8vw,2.8rem);font-weight:600;letter-spacing:-.04em;line-height:1.1}
+  .gate h2 .px{font-family:'Pixelify Sans',monospace}
+  .gate p.sub{color:#7b8096;margin:16px auto 30px;font-size:1.05rem;line-height:1.55}
+  .gbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:#fff;color:#1f1f1f;border:0;border-radius:99px;padding:16px 24px;font:600 1.02rem 'Figtree',sans-serif;cursor:pointer;transition:.2s;box-shadow:0 10px 34px rgba(60,90,255,.25)}
+  .gbtn:hover{transform:translateY(-2px)}
+  .gbtn:disabled{opacity:.6;cursor:wait;transform:none}
+  .gbtn svg{width:22px;height:22px}
+  .gate .fine{margin-top:22px;line-height:1.8}
+  .gate .err{color:#ff8a8f;font-size:.88rem;margin-top:16px;min-height:1.2em}
+  .gate .prev{margin-top:18px;border:1px dashed rgba(255,178,26,.5);border-radius:16px;padding:14px;color:#e8c880;font-size:.85rem;text-align:left;display:none}
+  .gate .prev button{margin-top:10px}
+  /* account chip + orders */
+  .acct{display:none;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .acct.show{display:flex}
+  .acct img,.acct .av{width:36px;height:36px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-weight:700;flex:none;object-fit:cover}
+  .acct b{display:block;font-size:.95rem;line-height:1.2}
+  .acct span{font-size:.75rem;color:var(--muted);word-break:break-all}
+  .ord{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:10px}
+  .ord .top{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+  .ord .mono{display:block;margin-top:6px;font-size:.66rem}
+  .empty{color:var(--muted);text-align:center;padding:24px 0}
+
   @media(max-width:520px){.loc .mono{display:none}.hero{padding-top:44px}.logo{font-size:1.7rem}}
   @media(prefers-reduced-motion:reduce){.star{animation:none}.card,.card:hover .pic svg{transition:none}}
 </style>
@@ -183,7 +212,9 @@
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
     <div class="menu" id="menu">
+      <div class="acct" id="acct"><span class="av" id="acctAv">?</span><div><b id="acctName"></b><span id="acctMail"></span></div></div>
       <a href="#menu-sec">Our Pizzas</a><a href="#how">How It Works</a><a href="#why">Why Crusto</a><a id="menuWa" href="#" target="_blank" rel="noopener">WhatsApp Us</a>
+      <a href="#" id="myOrdersLink">My Orders</a><a href="#" id="logoutLink">Log out</a>
     </div>
   </div>
 </nav>
@@ -257,220 +288,4 @@
   </div>
 </footer>
 
-<!-- Payment modal -->
-<div class="overlay" id="payOv">
-  <div class="modal">
-    <button class="x" onclick="closePay()" aria-label="Close">×</button>
-    <div class="mono">Your order</div>
-    <h3>Complete your payment</h3>
-    <div class="order">
-      <div><div id="oName" style="font-weight:600"></div><div id="oPlan" class="mono" style="margin-top:4px"></div>
-        <div class="qty"><button id="minus">−</button><b id="qtyN">1</b><button id="plus">+</button></div></div>
-      <b class="amt" id="oAmt"></b>
-    </div>
-    <input class="field" id="cName" placeholder="Your name" autocomplete="name" />
-    <input class="field" id="cAddr" placeholder="Delivery address" autocomplete="street-address" />
-    <div class="upibox">
-      <div class="mono">Pay to this UPI ID</div>
-      <code id="upiTxt"></code>
-      <button class="btn ghost sm" id="copyBtn">Copy UPI ID</button>
-    </div>
-    <a class="btn out block" id="upiApp" href="#">📱 Pay with UPI app (mobile)</a>
-    <button class="btn wa block" id="paidBtn">✅ I’ve Paid – Continue on WhatsApp</button>
-    <div class="note">After paying, tap the green button. WhatsApp opens with your order already typed – just press send.</div>
-  </div>
-</div>
-
-<button class="fab bot" onclick="toggleChat()" aria-label="Chat with AI">🤖</button>
-<a class="fab wa" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
-
-<div class="chat" id="chat">
-  <div class="chat-h"><div>Crusto AI<small>Ask about pizzas, prices &amp; payment</small></div><button onclick="toggleChat(false)" aria-label="Close chat">×</button></div>
-  <div class="msgs" id="msgs"></div>
-  <div class="quick" id="quick"></div>
-  <form class="chat-f" id="chatForm">
-    <input id="chatIn" placeholder="Type your question…" autocomplete="off" />
-    <button type="submit" aria-label="Send">➤</button>
-  </form>
-</div>
-
-<script>
-/* ============ EDIT YOUR SETTINGS HERE ============ */
-const CONFIG = {
-  brand: "Crusto",
-  whatsapp: "918291697606",       // country code + number
-  upiId: "8879406551@fam",
-  aiEndpoint: ""                  // optional: your own AI backend URL. Empty = built-in FAQ bot.
-};
-
-/* Pizzas. prices = [Regular, Medium, Large] in ₹ (edit freely).
-   t = veg (v) or non-veg (n). look = visual style for the drawn pizza. */
-const PIZZAS = [
-  { name:"Classic Margherita", t:"v", desc:"Simple, timeless: tomato sauce and mozzarella on a soft crust.", prices:[119,229,389], tag:"Best Seller", look:{sauce:"#c8321e", tops:[]} },
-  { name:"Cheese & Tomato", t:"v", desc:"Fresh tomato slices over a generous blanket of cheese.", prices:[139,259,419], look:{sauce:"#cf3a22", tops:[["#e8452c",9,"s"]]} },
-  { name:"Garden Fresh", t:"v", desc:"Onion, capsicum, tomato and sweet corn on a cheesy base.", prices:[179,319,499], look:{sauce:"#c8321e", tops:[["#5aa83a",8,"c"],["#e8d34a",10,"d"],["#d8452c",6,"s"]]} },
-  { name:"Paneer Pepper Crunch", t:"v", desc:"Paneer cubes, red paprika and crunchy capsicum, lightly spiced.", prices:[199,349,549], tag:"Popular", look:{sauce:"#c8321e", tops:[["#f6e6b8",10,"q"],["#d83a24",7,"s"],["#4f9d34",6,"c"]]} },
-  { name:"Farm Feast", t:"v", desc:"Mushroom, onion, tomato and capsicum, loaded the farm way.", prices:[209,369,579], look:{sauce:"#c0301c", tops:[["#cdb79a",9,"m"],["#e9e0f0",7,"o"],["#4f9d34",6,"c"],["#d8452c",5,"s"]]} },
-  { name:"Cheesy Overload", t:"v", desc:"Triple-cheese blend, golden, stretchy and extra gooey.", prices:[189,339,529], tag:"Cheesy", look:{sauce:"#e9a21f", tops:[["#fbd45a",16,"d"]]} },
-  { name:"Mexican Fiesta", t:"v", desc:"Jalapeño, red paprika and onion with a spicy Mexican herb mix.", prices:[219,379,589], look:{sauce:"#bf2c18", tops:[["#2f8f2f",9,"j"],["#d83a24",7,"s"],["#e9e0f0",6,"o"]]} },
-  { name:"Veggie Supreme", t:"v", desc:"Black olives, mushroom, paneer and capsicum for the full veg experience.", prices:[229,399,619], look:{sauce:"#c0301c", tops:[["#2b2b33",8,"j"],["#cdb79a",7,"m"],["#f6e6b8",6,"q"],["#4f9d34",6,"c"]]} },
-  { name:"Sweet Corn Crunch", t:"v", desc:"Golden sweet corn on a creamy cheese base.", prices:[149,269,429], look:{sauce:"#e8b33a", tops:[["#f5d442",22,"d"]]} },
-  { name:"Onion & Capsicum Duo", t:"v", desc:"Just two toppings, done right: crunchy onion and capsicum.", prices:[149,279,439], look:{sauce:"#c8321e", tops:[["#e9e0f0",10,"o"],["#4f9d34",9,"c"]]} },
-  { name:"Tandoori Paneer Tikka", t:"v", desc:"Smoky tandoori paneer, onion and capsicum with a tangy drizzle.", prices:[229,399,629], tag:"Spicy", look:{sauce:"#d65a1a", tops:[["#f0b070",9,"q"],["#e9e0f0",6,"o"],["#4f9d34",6,"c"]]} },
-  { name:"Mushroom Magic", t:"v", desc:"Juicy button mushrooms, onion and herbs on mozzarella.", prices:[179,319,499], look:{sauce:"#c8321e", tops:[["#cdb79a",12,"m"],["#e9e0f0",5,"o"]]} },
-  { name:"Chicken Sausage Classic", t:"n", desc:"Chicken sausage slices on a classic cheese and tomato base.", prices:[209,369,579], look:{sauce:"#c0301c", tops:[["#a8532f",12,"r"]]} },
-  { name:"Spicy Chicken Feast", t:"n", desc:"Peppery chicken, onion and capsicum with a smoky kick.", prices:[249,429,659], tag:"Chef’s Pick", look:{sauce:"#b9341a", tops:[["#b8683a",10,"q"],["#e9e0f0",6,"o"],["#4f9d34",6,"c"],["#d83a24",4,"s"]]} },
-];
-const SIZES = ["Regular","Medium","Large"];
-/* ================================================== */
-
-const $ = id => document.getElementById(id);
-const rs = n => "₹" + n.toLocaleString("en-IN");
-const waLink = t => `https://wa.me/${CONFIG.whatsapp}` + (t ? `?text=${encodeURIComponent(t)}` : "");
-
-/* starfield */
-(() => { const s = $("stars"); for(let i=0;i<70;i++){ const d=document.createElement("i"); d.className="star";
-  d.style.left=Math.random()*100+"%"; d.style.top=Math.random()*100+"%"; d.style.animationDelay=(Math.random()*4)+"s";
-  d.style.animationDuration=(3+Math.random()*4)+"s"; s.appendChild(d);} })();
-
-/* menu burger */
-$("burger").onclick = e => { e.stopPropagation(); $("menu").classList.toggle("show"); };
-document.addEventListener("click", e => { if(!e.target.closest("#menu")) $("menu").classList.remove("show"); });
-$("menu").addEventListener("click", () => $("menu").classList.remove("show"));
-
-/* drawn pizza (SVG) */
-function seeded(seed){ let x = seed*9301+49297; return () => (x = (x*9301+49297) % 233280) / 233280; }
-function pizzaSVG(p, idx){
-  const r = seeded(idx+3), c = 100;
-  let out = `<svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="#c98a3a"/><circle cx="100" cy="100" r="89" fill="#e4a652"/>
-    <circle cx="100" cy="100" r="80" fill="${p.look.sauce}"/><circle cx="100" cy="100" r="76" fill="#f7cf6a" opacity=".92"/>
-    <circle cx="100" cy="100" r="76" fill="none" stroke="#fff3c0" stroke-width="2" stroke-dasharray="3 9" opacity=".5"/>`;
-  p.look.tops.forEach(([col,n,shape]) => {
-    for(let i=0;i<n;i++){
-      const a = r()*6.283, d = Math.sqrt(r())*64, x = c+Math.cos(a)*d, y = c+Math.sin(a)*d, rot = r()*360;
-      if(shape==="s") out += `<ellipse cx="${x}" cy="${y}" rx="6" ry="4.5" fill="${col}" transform="rotate(${rot} ${x} ${y})"/>`;
-      else if(shape==="c") out += `<rect x="${x-5}" y="${y-2}" width="10" height="4" rx="2" fill="${col}" transform="rotate(${rot} ${x} ${y})"/>`;
-      else if(shape==="d") out += `<circle cx="${x}" cy="${y}" r="3" fill="${col}"/>`;
-      else if(shape==="q") out += `<rect x="${x-4}" y="${y-4}" width="8" height="8" rx="2" fill="${col}" transform="rotate(${rot} ${x} ${y})"/>`;
-      else if(shape==="m") out += `<path d="M${x-6} ${y+3} q6 -10 12 0 z M${x-1.5} ${y+3} h3 v4 h-3z" fill="${col}" transform="rotate(${rot} ${x} ${y})"/>`;
-      else if(shape==="o") out += `<circle cx="${x}" cy="${y}" r="5" fill="none" stroke="${col}" stroke-width="2"/>`;
-      else if(shape==="j") out += `<circle cx="${x}" cy="${y}" r="4.5" fill="${col}"/><circle cx="${x}" cy="${y}" r="1.6" fill="#0008"/>`;
-      else if(shape==="r") out += `<circle cx="${x}" cy="${y}" r="6" fill="${col}"/><circle cx="${x-1.5}" cy="${y-1}" r="1" fill="#f3b78c"/><circle cx="${x+2}" cy="${y+1.5}" r="1" fill="#f3b78c"/>`;
-    }
-  });
-  return out + `</svg>`;
-}
-
-/* render menu */
-let filter = "all";
-function render(){
-  $("grid").innerHTML = "";
-  PIZZAS.forEach((p,i) => {
-    if(filter!=="all" && p.t!==filter) return;
-    const card = document.createElement("div"); card.className = "card";
-    card.innerHTML = `
-      <span class="vn ${p.t}" title="${p.t==="v"?"Veg":"Non-veg"}"><i></i></span>
-      ${p.tag ? `<span class="mono tag" style="color:#ffcf5a">${p.tag}</span>` : ""}
-      <div class="pic">${pizzaSVG(p,i)}</div>
-      <h3>${p.name}</h3>
-      <div class="desc">${p.desc}</div>
-      <div class="sizes">${SIZES.map((s,k)=>`<button class="size" data-i="${i}" data-k="${k}"><span class="mono">${s}</span><b>${rs(p.prices[k])}</b></button>`).join("")}</div>`;
-    $("grid").appendChild(card);
-  });
-}
-render();
-$("chips").addEventListener("click", e => {
-  const b = e.target.closest(".chip"); if(!b) return;
-  document.querySelectorAll(".chip").forEach(c => c.classList.remove("on")); b.classList.add("on");
-  filter = b.dataset.f; render();
-});
-$("grid").addEventListener("click", e => {
-  const b = e.target.closest(".size"); if(!b) return;
-  openPay(PIZZAS[+b.dataset.i], +b.dataset.k);
-});
-
-/* payment modal (UPI ID only – no QR) */
-let cur = null;
-function refresh(){
-  const total = cur.price * cur.qty;
-  $("oAmt").textContent = rs(total); $("qtyN").textContent = cur.qty;
-  $("oPlan").textContent = `${SIZES[cur.k]} · ${rs(cur.price)} each`;
-  $("upiApp").href = `upi://pay?pa=${CONFIG.upiId}&pn=${encodeURIComponent(CONFIG.brand)}&am=${total}&cu=INR&tn=${encodeURIComponent(cur.p.name+" x"+cur.qty)}`;
-}
-function openPay(p,k){
-  cur = { p, k, price:p.prices[k], qty:1 };
-  $("oName").textContent = p.name; $("upiTxt").textContent = CONFIG.upiId; $("copyBtn").textContent = "Copy UPI ID";
-  refresh(); $("payOv").classList.add("show");
-}
-function closePay(){ $("payOv").classList.remove("show"); }
-$("payOv").addEventListener("click", e => { if(e.target.id==="payOv") closePay(); });
-$("minus").onclick = () => { if(cur.qty>1){ cur.qty--; refresh(); } };
-$("plus").onclick = () => { if(cur.qty<20){ cur.qty++; refresh(); } };
-$("copyBtn").onclick = async () => {
-  try{ await navigator.clipboard.writeText(CONFIG.upiId); $("copyBtn").textContent = "Copied ✓"; }
-  catch(e){ $("copyBtn").textContent = "Long-press the ID to copy"; }
-};
-$("paidBtn").onclick = () => {
-  if(!cur) return;
-  const name = $("cName").value.trim(), addr = $("cAddr").value.trim();
-  const msg = `Hello! I purchased an order of ${cur.qty} × ${cur.p.name} (${SIZES[cur.k]}) for ${rs(cur.price*cur.qty)}. I have completed the payment via UPI.` +
-    (name ? `\nName: ${name}` : "") + (addr ? `\nDelivery address: ${addr}` : "");
-  window.open(waLink(msg), "_blank"); closePay();
-};
-
-["fabWa","menuWa"].forEach(id => $(id).href = waLink("Hello! I want to order a pizza."));
-$("yr").textContent = new Date().getFullYear();
-
-/* ============ CHATBOT ============ */
-const chat = $("chat"), msgs = $("msgs"), quick = $("quick"), chatIn = $("chatIn");
-let greeted = false;
-function toggleChat(force){
-  const show = force === undefined ? !chat.classList.contains("show") : force;
-  chat.classList.toggle("show", show);
-  if(show && !greeted){
-    greeted = true;
-    addMsg("Hi! 🍕 I’m the Crusto assistant. Ask me about pizzas, prices, veg options or payment.", "b");
-    ["Veg pizzas","Non-veg pizzas","Cheapest pizza","How to pay?","Talk to us"].forEach(q => {
-      const b = document.createElement("button"); b.textContent = q; b.onclick = () => send(q); quick.appendChild(b);
-    });
-  }
-}
-function addMsg(t, who){
-  const d = document.createElement("div"); d.className = "m " + who;
-  if(who==="b") d.innerHTML = t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/(https?:\/\/\S+)/g,'<a href="$1" target="_blank" rel="noopener">Open WhatsApp</a>');
-  else d.textContent = t;
-  msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight; return d;
-}
-const line = p => `• ${p.name} – ${p.prices.map((x,k)=>SIZES[k][0]+" "+rs(x)).join(" / ")}`;
-function localAnswer(q){
-  const t = q.toLowerCase();
-  const hit = PIZZAS.find(p => t.includes(p.name.toLowerCase().split(/[ &]/)[0]) && t.length > 3 && p.name.toLowerCase().split(" ").some(w => w.length>3 && t.includes(w)));
-  if(hit) return `${hit.name}: ${hit.desc}\n` + hit.prices.map((x,k)=>`${SIZES[k]} – ${rs(x)}`).join("\n") + "\n\nTap a size on the menu to order.";
-  if(/(non.?veg|chicken|meat)/.test(t)) return "Non-veg pizzas:\n" + PIZZAS.filter(p=>p.t==="n").map(line).join("\n");
-  if(/(veg|paneer|vegetarian)/.test(t)) return "We have " + PIZZAS.filter(p=>p.t==="v").length + " veg pizzas, such as " + PIZZAS.filter(p=>p.t==="v").slice(0,5).map(p=>p.name).join(", ") + ". Use the Veg filter on the menu to see all.";
-  if(/(cheap|lowest|budget|least)/.test(t)){ const c=[...PIZZAS].sort((a,b)=>a.prices[0]-b.prices[0])[0]; return `Our lowest price is ${c.name} at ${rs(c.prices[0])} (Regular).`; }
-  if(/(price|cost|rate|how much|menu|list|available|pizza)/.test(t)) return "Our pizzas:\n" + PIZZAS.map(line).join("\n");
-  if(/(pay|upi|gpay|phonepe|paytm)/.test(t)) return `1) Choose a pizza and size\n2) Pay to UPI ID ${CONFIG.upiId}\n3) Tap “I’ve Paid” – WhatsApp opens with your order\n4) Send it, and we’ll confirm.`;
-  if(/(deliver|address|time|how long|when)/.test(t)) return "Add your name and address before paying, and it goes into your WhatsApp message. We’ll confirm delivery time there.";
-  if(/(size|regular|medium|large)/.test(t)) return "Sizes: Regular (about 7\"), Medium (about 9\") and Large (about 12\"). Approximate sizes.";
-  if(/(refund|problem|issue|wrong|cold|late|support|help)/.test(t)) return "Sorry about that! Please message us directly on WhatsApp so we can fix it quickly.";
-  if(/(whatsapp|owner|call|contact|talk|human|us)\b/.test(t)) return "Chat with us directly: " + waLink("Hello! I need help with my pizza order.");
-  if(/\b(hi|hello|hey)\b/.test(t)) return "Hello! 😊 What are you craving today?";
-  return "I’m not sure about that one. For a personal answer, chat with us on WhatsApp: " + waLink("Hello! I have a question.");
-}
-async function send(text){
-  text = (text || chatIn.value).trim(); if(!text) return;
-  chatIn.value = ""; addMsg(text, "u");
-  const typing = addMsg("…", "b"); let reply;
-  if(CONFIG.aiEndpoint){
-    try{ const r = await fetch(CONFIG.aiEndpoint,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text})}); const j = await r.json(); reply = j.reply || localAnswer(text); }
-    catch(e){ reply = localAnswer(text); }
-  } else { await new Promise(r => setTimeout(r,450)); reply = localAnswer(text); }
-  typing.innerHTML = ""; typing.textContent = reply;
-  typing.innerHTML = typing.textContent.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/(https?:\/\/\S+)/g,'<a href="$1" target="_blank" rel="noopener">Open WhatsApp</a>');
-  msgs.scrollTop = msgs.scrollHeight;
-}
-$("chatForm").addEventListener("submit", e => { e.preventDefault(); send(); });
-</script>
-</body>
-</html>
+<!-- Login
