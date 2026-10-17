@@ -164,35 +164,6 @@
   .chat-f input:focus{border-color:#5668ff}
   .chat-f button{border:0;background:var(--grad);color:#fff;width:46px;border-radius:50%;cursor:pointer;font-size:1.1rem}
 
-
-  /* login gate */
-  .gate{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;align-items:center;justify-content:center;padding:24px;overflow:auto}
-  .gate.show{display:flex}
-  .gate::before{content:"";position:absolute;left:50%;top:0;transform:translateX(-50%);width:900px;max-width:140vw;height:560px;background:radial-gradient(ellipse at 50% 0%,rgba(40,60,160,.5),rgba(8,8,11,0) 70%);pointer-events:none}
-  .gate-in{position:relative;width:100%;max-width:420px;text-align:center}
-  .gate .logo{justify-content:center;margin-bottom:34px}
-  .gate h2{font-size:clamp(2rem,8vw,2.8rem);font-weight:600;letter-spacing:-.04em;line-height:1.1}
-  .gate h2 .px{font-family:'Pixelify Sans',monospace}
-  .gate p.sub{color:#7b8096;margin:16px auto 30px;font-size:1.05rem;line-height:1.55}
-  .gbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;background:#fff;color:#1f1f1f;border:0;border-radius:99px;padding:16px 24px;font:600 1.02rem 'Figtree',sans-serif;cursor:pointer;transition:.2s;box-shadow:0 10px 34px rgba(60,90,255,.25)}
-  .gbtn:hover{transform:translateY(-2px)}
-  .gbtn:disabled{opacity:.6;cursor:wait;transform:none}
-  .gbtn svg{width:22px;height:22px}
-  .gate .fine{margin-top:22px;line-height:1.8}
-  .gate .err{color:#ff8a8f;font-size:.88rem;margin-top:16px;min-height:1.2em}
-  .gate .prev{margin-top:18px;border:1px dashed rgba(255,178,26,.5);border-radius:16px;padding:14px;color:#e8c880;font-size:.85rem;text-align:left;display:none}
-  .gate .prev button{margin-top:10px}
-  /* account chip + orders */
-  .acct{display:none;align-items:center;gap:12px;padding:10px 14px;border-bottom:1px solid var(--line);margin-bottom:6px}
-  .acct.show{display:flex}
-  .acct img,.acct .av{width:36px;height:36px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-weight:700;flex:none;object-fit:cover}
-  .acct b{display:block;font-size:.95rem;line-height:1.2}
-  .acct span{font-size:.75rem;color:var(--muted);word-break:break-all}
-  .ord{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:10px}
-  .ord .top{display:flex;justify-content:space-between;gap:10px;font-weight:600}
-  .ord .mono{display:block;margin-top:6px;font-size:.66rem}
-  .empty{color:var(--muted);text-align:center;padding:24px 0}
-
   @media(max-width:520px){.loc .mono{display:none}.hero{padding-top:44px}.logo{font-size:1.7rem}}
   @media(prefers-reduced-motion:reduce){.star{animation:none}.card,.card:hover .pic svg{transition:none}}
 </style>
@@ -212,9 +183,7 @@
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
     <div class="menu" id="menu">
-      <div class="acct" id="acct"><span class="av" id="acctAv">?</span><div><b id="acctName"></b><span id="acctMail"></span></div></div>
       <a href="#menu-sec">Our Pizzas</a><a href="#how">How It Works</a><a href="#why">Why Crusto</a><a id="menuWa" href="#" target="_blank" rel="noopener">WhatsApp Us</a>
-      <a href="#" id="myOrdersLink">My Orders</a><a href="#" id="logoutLink">Log out</a>
     </div>
   </div>
 </nav>
@@ -288,4 +257,54 @@
   </div>
 </footer>
 
-<!-- Login
+<!-- Payment modal -->
+<div class="overlay" id="payOv">
+  <div class="modal">
+    <button class="x" onclick="closePay()" aria-label="Close">×</button>
+    <div class="mono">Your order</div>
+    <h3>Complete your payment</h3>
+    <div class="order">
+      <div><div id="oName" style="font-weight:600"></div><div id="oPlan" class="mono" style="margin-top:4px"></div>
+        <div class="qty"><button id="minus">−</button><b id="qtyN">1</b><button id="plus">+</button></div></div>
+      <b class="amt" id="oAmt"></b>
+    </div>
+    <input class="field" id="cName" placeholder="Your name" autocomplete="name" />
+    <input class="field" id="cAddr" placeholder="Delivery address" autocomplete="street-address" />
+    <div class="upibox">
+      <div class="mono">Pay to this UPI ID</div>
+      <code id="upiTxt"></code>
+      <button class="btn ghost sm" id="copyBtn">Copy UPI ID</button>
+    </div>
+    <a class="btn out block" id="upiApp" href="#">📱 Pay with UPI app (mobile)</a>
+    <button class="btn wa block" id="paidBtn">✅ I’ve Paid – Continue on WhatsApp</button>
+    <div class="note">After paying, tap the green button. WhatsApp opens with your order already typed – just press send.</div>
+  </div>
+</div>
+
+<button class="fab bot" onclick="toggleChat()" aria-label="Chat with AI">🤖</button>
+<a class="fab wa" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
+<div class="chat" id="chat">
+  <div class="chat-h"><div>Crusto AI<small>Ask about pizzas, prices &amp; payment</small></div><button onclick="toggleChat(false)" aria-label="Close chat">×</button></div>
+  <div class="msgs" id="msgs"></div>
+  <div class="quick" id="quick"></div>
+  <form class="chat-f" id="chatForm">
+    <input id="chatIn" placeholder="Type your question…" autocomplete="off" />
+    <button type="submit" aria-label="Send">➤</button>
+  </form>
+</div>
+
+<script>
+/* ============ EDIT YOUR SETTINGS HERE ============ */
+const CONFIG = {
+  brand: "Crusto",
+  whatsapp: "918291697606",       // country code + number
+  upiId: "8879406551@fam",
+  aiEndpoint: ""                  // optional: your own AI backend URL. Empty = built-in FAQ bot.
+};
+
+/* Pizzas. prices = [Regular, Medium, Large] in ₹ (edit freely).
+   t = veg (v) or non-veg (n). look = visual style for the drawn pizza. */
+const PIZZAS = [
+  { name:"Classic Margherita", t:"v", desc:"Simple, timeless: tomato sauce and mozzarella on a soft crust.", prices:[119,229,389], tag:"Best Seller", look:{sauce:"#c8321e", tops:[]} },
+  { name:"Cheese & Tomato", t:"v", desc:"Fresh toma
